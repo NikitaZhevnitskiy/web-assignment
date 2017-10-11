@@ -5,9 +5,9 @@ const User = require('../models/user')
     , jwtSimple = require('jwt-simple') //TODO: move authentication
     , bcrypt = require('bcryptjs')
 
-exports.hash = function(password) {
-    return bcrypt.hashSync(password, 10);
-};
+// exports.hash = function(password) {
+//     return bcrypt.hashSync(password, 10);
+// };
 
 exports.getAll = function({}, cb) {
     User.find((err, users) => {
@@ -16,10 +16,10 @@ exports.getAll = function({}, cb) {
     })
 };
 
-exports.registerUser=function(username, password, cb) {
+exports.registerUser=function(username, hashedPassword, cb) {
     var user = {
         username: username,
-        password: this.hash(password),
+        password: hashedPassword,
     };
     const u = new User(user);
     u.save((err,entity)=>{

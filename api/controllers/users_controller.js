@@ -4,6 +4,7 @@ var express = require('express')
     , auth = require('../middlewares/auth')
     , mongoose = require('mongoose')
     , UserRepository = require('../repositories/user_repo')
+    , AuthService = require('../services/auth_service');
 
 mongoose.connect('mongodb://localhost/test')
 
@@ -13,7 +14,9 @@ router.post('/', function(req, res) {
     const passwordInput = req.body.password;
 
     if (Validator.isValid(username) && Validator.isValid(passwordInput)){
-        UserRepository.registerUser(username, passwordInput, function (err,user) {
+        const hashedPassword = AuthService.hash(passwordInput);
+        console.log(passwordInput + "_____" + hashedPassword);
+        UserRepository.registerUser(username, hashedPassword, function (err,user) {
             if(err) {
                 res.send(err);
                 return;
