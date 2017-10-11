@@ -1,5 +1,5 @@
-const jwtSimple = require('jwt-simple');
-const bcrypt = require('bcryptjs');
+// const jwtSimple = require('jwt-simple');
+// const bcrypt = require('bcryptjs');
 User = require('../models/user');
 
 
