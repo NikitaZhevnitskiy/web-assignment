@@ -2,21 +2,34 @@ var express = require('express')
     , router = express.Router()
     , User = require('../models/user')
     , Validator = require('../helpers/validator')
-    , auth = require('../middlewares/auth');
+    , auth = require('../middlewares/auth')
+    , UserRepository = require('../repositories/user_repo');
 
 router.post('/login', function(req, res) {
-
-
     const userBody = req.body
-
     if (Validator.isValid(userBody.username) && Validator.isValid(userBody.password)){
+        const hashedPass = UserRepository.hash(userBody.password);
+            // 1. finn brukeren by brukernavn
+            // console.log(userBody.username);
+            UserRepository.getUserByUsername(userBody.username, function (err, user) {
+                if(err) {
+                    res.status(500).send(err);
+                    return;
+                }
+                // 2. sammenlikn passord
 
-    // 1. finn brukeren by brukernavn
-    // 2. sammenlikn passord
-    // 3. hvis feil: 401 Unauthorized
-    // 4. hvis rett: lag token
-        res.status(200).send('input is valid. Thank you!!!')
-
+                //TODO: WTF different hash for same value
+                console.log(user.password);
+                console.log(hashedPass);
+                console.log("hash for 7: "+UserRepository.hash('7'));
+                if(user.password === hashedPass){
+                    //TODO: 4. hvis rett: lag token
+                    res.status(200).send(user);
+                } else {
+                    // 3. hvis feil: 401 Unauthorized
+                    res.status(401).send('wrong password')
+                }
+            });
     } else {
         res.status(400).send('Check input fields. Username and password')
     }
