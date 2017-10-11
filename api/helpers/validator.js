@@ -1,15 +1,7 @@
-//TODO: make more validation
+//TODO: more validation
 
-module.exports = function() {
-
-    var ValidatorService = {
-        isValid: function (input) {
-            if(input && input!=='unidentified'){
-                return true;
-            } else {
-                return false;
-            }
-        }
-    };
-    return ValidatorService;
+exports.isValid = function (input) {
+    const line = input.trim();
+    if(line && line!=='unidentified' && !~line.indexOf(' ')) {return true;}
+    return false;
 };

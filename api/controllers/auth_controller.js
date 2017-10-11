@@ -1,6 +1,37 @@
-// const validator = require('../helpers/validator')();
-// const authService = require('../services/auth_service')();
+var express = require('express')
+    , router = express.Router()
+    , User = require('../models/user')
+    , Validator = require('../helpers/validator')
+    , auth = require('../middlewares/auth');
+
+router.post('/login', function(req, res) {
+
+    const user = req.body
+
+    if (Validator.isValid(user.username) && Validator.isValid(user.password)){
+
+//     // 1. finn brukeren by brukernavn
+//         const matchedUser = authService.findUserByUsername(user.username);
+//         if (matchedUser === null) {res.status(401).send('No such user');return;}
 //
+//     // 2. sammenlikn passord
+//         const passwordMatches = authService.checkPassword(matchedUser,user.password);
+//
+//     // 3. hvis feil: 401 Unauthorized
+//         if (!passwordMatches) {res.status(401).send('Wrong password');return;}
+//
+//     // 4. hvis rett: lag token
+//         const tokken = authService.generateToken(user);
+//
+//         res.status(201).send(tokken);
+    } else {
+        res.status(400).send('Check input fields. Username and password')
+    }
+
+});
+module.exports = router;
+
+
 // module.exports = function(app){
 //
 //     app.get('/hello', (req, res) => {

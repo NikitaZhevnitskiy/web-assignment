@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/test')
 const User = mongoose.model('User', {
-    username: { type: String, required: true },
+    username: { type: String, unique : true, required: true },
     password: { type: String, required: true },
 });
 const ObjectID = require('mongodb').ObjectID
@@ -21,7 +21,7 @@ exports.create = function(username, password, cb) {
     const u = new User(user)
     // console.log(u);
     u.save((err,entity)=>{
-        if(err)return cb(err);
+        if(err)return cb(err.message);
         cb(null,entity);
     });
 };
