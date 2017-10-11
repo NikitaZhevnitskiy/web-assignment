@@ -5,7 +5,7 @@ var express = require('express')
     , auth = require('../middlewares/auth');
 
 router.post('/', function(req, res) {
-    const username = req.body.username;
+    const username = req.body.username.toLowerCase();
     const passwordInput = req.body.password;
 
     if (Validator.isValid(username) && Validator.isValid(passwordInput)){
@@ -25,7 +25,7 @@ router.post('/', function(req, res) {
 router.get('/', auth, function(req, res) {
     User.get({},function (err,users) {
         if(err) {
-         res.send(err);
+         res.status(500).send(err);
          return;
         }
         res.status(200).send(users);

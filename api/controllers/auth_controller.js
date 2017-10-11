@@ -6,24 +6,17 @@ var express = require('express')
 
 router.post('/login', function(req, res) {
 
-    const user = req.body
 
-    if (Validator.isValid(user.username) && Validator.isValid(user.password)){
+    const userBody = req.body
 
-//     // 1. finn brukeren by brukernavn
-//         const matchedUser = authService.findUserByUsername(user.username);
-//         if (matchedUser === null) {res.status(401).send('No such user');return;}
-//
-//     // 2. sammenlikn passord
-//         const passwordMatches = authService.checkPassword(matchedUser,user.password);
-//
-//     // 3. hvis feil: 401 Unauthorized
-//         if (!passwordMatches) {res.status(401).send('Wrong password');return;}
-//
-//     // 4. hvis rett: lag token
-//         const tokken = authService.generateToken(user);
-//
-//         res.status(201).send(tokken);
+    if (Validator.isValid(userBody.username) && Validator.isValid(userBody.password)){
+
+    // 1. finn brukeren by brukernavn
+    // 2. sammenlikn passord
+    // 3. hvis feil: 401 Unauthorized
+    // 4. hvis rett: lag token
+        res.status(200).send('input is valid. Thank you!!!')
+
     } else {
         res.status(400).send('Check input fields. Username and password')
     }
