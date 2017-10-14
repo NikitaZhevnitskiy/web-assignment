@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Redirect } from 'react-router-dom'
+import {URL_API_LOGIN} from "../utils/RoutesApi";
+import {setToken} from '../utils/AuthService';
 
 class Login extends Component{
     constructor(props) {
@@ -7,7 +10,9 @@ class Login extends Component{
 
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            err:false,
+            redirect:false
         };
     }
 
@@ -23,46 +28,93 @@ class Login extends Component{
 
     handleSubmit = event => {
         event.preventDefault();
-        //TODO post on users
+        this.setState({err: false});
+        this.setState({redirect: false});
+
+        try {
+            fetch(URL_API_LOGIN, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.state)
+            })
+                .then(response => {
+                    switch(response.status){
+                        case 401:{
+                            console.log("Error 401")
+                            this.setState({err: true})
+                            return {}
+                        }
+                        case 500:{
+                            console.log("Error 500")
+                            this.setState({err: true})
+                            return {}
+                        }
+                        case 200:{
+                            console.log("All ok 500")
+                            return response.json()
+                        }
+                    }
+                })
+                .then(json => {
+                    if(json.token){
+                        console.log(json.token);
+                        setToken(json.token)
+                        this.setState({redirect:true})
+                    }
+                })
+        }catch (err){this.setState({err:true})}
     };
 
     render() {
-        return (
-            <div>
+        const {redirect}=this.state;
+        if(redirect)
+            return <Redirect to="/" />
+        else {
+            return(
                 <div>
-                    <h3>Login</h3>
+                    <div>
+                        <h3>Login</h3>
+                        {this.state.err ?
+                            <div className="alert alert-danger">
+                                <strong>Error:</strong> Check input fields
+                            </div>
+                            : ""}
+                    </div>
+                    <div className="Login">
+                        <form onSubmit={this.handleSubmit}>
+                            <FormGroup controlId="email" bsSize="large">
+                                <ControlLabel>Email</ControlLabel>
+                                <FormControl
+                                    autoFocus
+                                    type="email"
+                                    value={this.state.email}
+                                    onChange={this.handleChange}
+                                />
+                            </FormGroup>
+                            <FormGroup controlId="password" bsSize="large">
+                                <ControlLabel>Password</ControlLabel>
+                                <FormControl
+                                    value={this.state.password}
+                                    onChange={this.handleChange}
+                                    type="password"
+                                />
+                            </FormGroup>
+                            <Button
+                                block
+                                bsSize="large"
+                                disabled={!this.validateForm()}
+                                type="submit"
+                            >
+                                Login
+                            </Button>
+                        </form>
+                    </div>
                 </div>
-                <div className="Login">
-                    <form onSubmit={this.handleSubmit}>
-                        <FormGroup controlId="email" bsSize="large">
-                            <ControlLabel>Email</ControlLabel>
-                            <FormControl
-                                autoFocus
-                                type="email"
-                                value={this.state.email}
-                                onChange={this.handleChange}
-                            />
-                        </FormGroup>
-                        <FormGroup controlId="password" bsSize="large">
-                            <ControlLabel>Password</ControlLabel>
-                            <FormControl
-                                value={this.state.password}
-                                onChange={this.handleChange}
-                                type="password"
-                            />
-                        </FormGroup>
-                        <Button
-                            block
-                            bsSize="large"
-                            disabled={!this.validateForm()}
-                            type="submit"
-                        >
-                            Login
-                        </Button>
-                    </form>
-                </div>
-            </div>
-        );
+            )
+        }
     }
 
 
