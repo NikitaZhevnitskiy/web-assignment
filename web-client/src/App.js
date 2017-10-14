@@ -1,31 +1,34 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+import {Router, Route, Switch, Redirect} from 'react-router-dom'
+import history from './history'
 // COMPONENTS
 import Header from './components/Header';
 import Login from './components/Login';
 import Signup from './components/Signup';
-
+import Home from './components/Home'
 //Stabs
-const SomePage = () => <div>Some page that exists</div>;
-const NoMatch = () => <div>Page not exists</div>;
+const NoMatch = () => <div>Page not found</div>;
+
 
 class App extends Component {
     render() {
         return(
 
-            <BrowserRouter>
+            <Router history={history}>
                 <div className="container">
                     <Header/>
-                    <Switch>
-                        <Route exact path="/login" component={Login}/>
-                        <Route exact path="/signup" component={Signup}/>
+                    <div className="container-fluid">
+                        <Switch>
+                            <Route exact path="/login" component={Login}/>
+                            <Route exact path="/signup" component={Signup}/>
 
-                        <Route exact path="/somepage" component={SomePage}/>
-                        <Route exact path="/" render={() => (<Redirect to="/somepage" />)} />
-                        <Route path="*" component={NoMatch} />
-                    </Switch>
+                            <Route exact path="/home" component={Home}/>
+                            <Route exact path="/" render={() => (<Redirect to="/home" />)} />
+                            <Route path="*" component={NoMatch} />
+                        </Switch>
+                    </div>
                 </div>
-            </BrowserRouter>
+            </Router>
         )
     }
 }
