@@ -6,7 +6,12 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
+    "concurrently": "^3.5.0",
     "express": "^4.16.2",
-    "jwt-simple": "^0.5.1"
+    "jwt-simple": "^0.5.1",
+    "mongoose": "^4.12.1"
+  },
+  "scripts": {
+    "dev-mongo": "concurrently mongod \"node server.js\""
   }
 }
