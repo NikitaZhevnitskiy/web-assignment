@@ -6,12 +6,12 @@ var express = require('express')
 
 router.post('/login', function(req, res) {
     const userBody = req.body;
-    const usernameInput = userBody.username+"";
+    const emailInput = userBody.email+"";
     const passwordInput = userBody.password+"";
 
-    if (Validator.isValid(usernameInput) && Validator.isValid(passwordInput)){
+    if (Validator.isValid(emailInput) && Validator.isValid(passwordInput)){
             // 1. finn brukeren by brukernavn
-            UserRepository.getUserByUsername(usernameInput, function (err, user) {
+            UserRepository.getUserByEmail(emailInput, function (err, user) {
 
                 if(err) {
                     res.status(500).send(err);
@@ -26,7 +26,7 @@ router.post('/login', function(req, res) {
                 // 2. sammenlikn passord
                 if(AuthService.compareHashes(passwordInput, user.password)){
                     // 4. hvis rett: lag token
-                    const token = AuthService.generateToken(user.username);
+                    const token = AuthService.generateToken(user.email);
                     res.status(200).send(token);
                 } else {
 
@@ -35,7 +35,7 @@ router.post('/login', function(req, res) {
                 }
             });
     } else {
-        res.status(400).send('Check input fields. Username and password')
+        res.status(400).send('Check input fields. Email and password')
     }
 
 });
@@ -45,12 +45,12 @@ router.get('/me', function (req, res) {
     // No token
     if(!token){res.status(401).send('Anauthorized: No token'); return;}
 
-    const username = AuthService.decodeToken(token);
+    const email = AuthService.decodeToken(token);
     // Bad token
-    if(!username){res.status(401).send('Anauthorized: BAD token'); return;}
+    if(!email){res.status(401).send('Anauthorized: BAD token'); return;}
 
     // All OK
-    res.status(200).send(username);
+    res.status(200).send(email);
 });
 
 

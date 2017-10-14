@@ -9,14 +9,14 @@ var express = require('express')
 mongoose.connect('mongodb://localhost/test')
 
 router.post('/', function(req, res) {
-
-    const username = req.body.username.toLowerCase();
+    console.log(req.body)
+    const email = req.body.email.toLowerCase();
     const passwordInput = req.body.password;
 
-    if (Validator.isValid(username) && Validator.isValid(passwordInput)){
+    if (Validator.isValid(email) && Validator.isValid(passwordInput)){
         const hashedPassword = AuthService.hash(passwordInput);
         console.log(passwordInput + "_____" + hashedPassword);
-        UserRepository.registerUser(username, hashedPassword, function (err,user) {
+        UserRepository.registerUser(email, hashedPassword, function (err,user) {
             if(err) {
                 res.send(err);
                 return;

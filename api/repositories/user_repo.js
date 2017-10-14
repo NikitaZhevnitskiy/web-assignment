@@ -16,10 +16,11 @@ exports.getAll = function({}, cb) {
     })
 };
 
-exports.registerUser=function(username, hashedPassword, cb) {
+exports.registerUser=function(email, hashedPassword, cb) {
     var user = {
-        username: username,
+        email: email,
         password: hashedPassword,
+        todolist: []
     };
     const u = new User(user);
     u.save((err,entity)=>{
@@ -29,8 +30,8 @@ exports.registerUser=function(username, hashedPassword, cb) {
     });
 };
 
-exports.getUserByUsername = function(username, cb){
-    User.findOne({'username':username}, (err, user) => {
+exports.getUserByEmail = function(email, cb){
+    User.findOne({'email':email}, (err, user) => {
         console.log(user)
         if (err) cb(err);
         cb(null,user);

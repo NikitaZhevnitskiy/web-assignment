@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
+const URL = 'localhost:3000/users';
+
 class Signup extends Component{
     constructor(props) {
         super(props);
@@ -22,8 +24,7 @@ class Signup extends Component{
     };
 
     handleSubmit = event => {
-        localStorage.setItem('token','is mine');
-        console.log(localStorage.getItem('token'));
+        console.log(this.state);
         event.preventDefault();
         //TODO post on users
 
