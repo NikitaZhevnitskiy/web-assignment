@@ -1,78 +1,21 @@
 /******************************
-            COLORS
-             BODY
-white: #313131
+            NAVBAR
 *******************************/
-
-body{
-    margin: 0;
-    padding:0;
-    color: black;
-}
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-/******************************
-            HEADER
-*******************************/
-header {
-    border-bottom: 1px solid lightgray;
-    text-align: center;
-    font-family: 'Sedgwick Ave Display', cursive;
-    font-size: 28px;
-    padding: 10px 0;
-    background: #1da1f2;
-}
-header .logo{
-    color: #ffffff !important;
-}
-
-/******************************
-         CREATE ITEM FORM
-*******************************/
-.container{
-    margin: 15px;
-}
-.container .btn{
-    background: #1da1f2;
-    border-color: white;
+.navbar-right { margin-right: 0px !important}
+.log {
+    margin: 5px 10px 0 0;
 }
 /******************************
-            SEARCH FORM
+            LOGIN
+            FORM
 *******************************/
-.list_input {
-    padding: 35px 0px;
-    background: #1da1f2;
-    text-align: center;
-}
-.list_input input {
-    font-size: 20px;
-    padding: 10px;
-    font-weight: 500;
-    text-align: center;
-    border-radius: 30px;
-    border: 1px solid lightgrey;
-}
-.list_input input::placeholder{
-    color: lightgray;
-}
+@media all and (min-width: 480px) {
+    .Login {
+        padding: 60px 0;
+    }
 
-/******************************
-            SEARCH
-*******************************/
-.list_item{
-    border: 1px solid #1da1f2;
-    margin: 15px;
-    padding: 15px;
-    border-radius: 10px;
-    position: relative;
+    .Login form {
+        margin: 0 auto;
+        max-width: 320px;
+    }
 }
-.list_item .btn{
-    position: absolute;
-    right: 10px;
-    top: 10px;
-}
-
-

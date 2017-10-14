@@ -109,3 +109,6 @@ The second case is transfer or analyze streaming data.
 [Quora](https://www.quora.com/What-are-the-pros-and-cons-of-MEAN-javascript-stack-vs-LAMP-stack)  
 [Altexsoft](https://www.altexsoft.com/blog/engineering/the-good-and-the-bad-of-javascript-full-stack-development/)
 [BBVA](https://bbvaopen4u.com/en/actualidad/rest-api-what-it-and-what-are-its-advantages-project-development)
+
+Login design  
+https://serverless-stack.com/chapters/create-a-login-page.html  
