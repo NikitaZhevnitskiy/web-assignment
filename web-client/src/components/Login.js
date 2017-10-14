@@ -2,9 +2,15 @@ import React, {Component} from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { Redirect } from 'react-router-dom'
 import {URL_API_LOGIN} from "../utils/RoutesApi";
-import {setToken} from '../utils/AuthService';
+import {setToken, isLogged} from '../utils/AuthService';
 
 class Login extends Component{
+    componentDidMount(){
+        if(isLogged()){
+            this.setState({redirect:true})
+        }
+    }
+
     constructor(props) {
         super(props);
 

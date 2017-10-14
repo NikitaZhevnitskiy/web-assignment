@@ -1,25 +1,33 @@
 import React, {Component} from 'react';
-import {getTokenFromStorage, isLogged} from "../utils/AuthService";
+import {isLogged, getUserInSystem} from "../utils/AuthService";
 
 
 class Home extends Component {
 
     componentDidMount(){
-        this.setState({loggedIn:isLogged()})
+        if(isLogged()){
+            this.setState({loggedIn:isLogged()})
+            getUserInSystem((email)=>{this.setState({userInSystem:email})})
+        } else {
+            this.setState({loggedIn:isLogged()})
+        }
     }
 
     constructor(props){
         super(props);
         this.state = {
-            loggedIn:false
+            loggedIn:false,
+            userInSystem:''
         };
     }
-    render() {
 
+
+
+    render() {
         if (this.state.loggedIn) {
             return (
                 <div>
-                    User in system
+                    User in system: {this.state.userInSystem}
                 </div>
             )
         }
@@ -28,7 +36,7 @@ class Home extends Component {
                 <div>
                     <div className="jumbotron">
                         <h1>Welcome to ToDo list application</h1>
-                        {console.log(getTokenFromStorage())}
+                        {/*{console.log(getTokenFromStorage())}*/}
                         <p>Login || Register please</p>
                     </div>
                 </div>

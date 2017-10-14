@@ -2,9 +2,17 @@ import React, {Component} from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { Redirect } from 'react-router-dom'
 import {URL_API_USERS} from '../utils/RoutesApi'
+import {isLogged} from "../utils/AuthService";
 
 
 class Signup extends Component {
+
+    componentDidMount(){
+        if(isLogged()){
+            this.setState({redirect:true})
+        }
+    }
+
     constructor(props) {
         super(props);
 

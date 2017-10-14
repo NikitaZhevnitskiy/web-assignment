@@ -50,7 +50,8 @@ router.get('/me', function (req, res) {
     if(!email){res.status(401).send('Anauthorized: BAD token'); return;}
 
     // All OK
-    res.status(200).send(email);
+    // res.status(200).send(email);
+    res.status(200).json({email:email});
 });
 
 
