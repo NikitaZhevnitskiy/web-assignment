@@ -18,13 +18,14 @@ router.post('/', function(req, res) {
         console.log(passwordInput + "_____" + hashedPassword);
         UserRepository.registerUser(email, hashedPassword, function (err,user) {
             if(err) {
-                res.send(err);
+                res.status(401).send(JSON.stringify(err));
                 return;
             }
             res.status(201).send(user._id);
+            // res.status(201).redirect('/login');
         });
     } else {
-        res.status(500).send('Check input fields')
+        res.status(401).send('Check input fields')
     }
 });
 
