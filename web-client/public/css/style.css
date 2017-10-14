@@ -19,3 +19,7 @@
         max-width: 320px;
     }
 }
+
+.container-fluid {
+    margin-top: 100px;
+}

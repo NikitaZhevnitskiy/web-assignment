@@ -53,14 +53,14 @@ class Login extends Component{
                             return {}
                         }
                         case 200:{
-                            console.log("All ok 500")
+                            console.log("All ok 200")
                             return response.json()
                         }
                     }
                 })
                 .then(json => {
                     if(json.token){
-                        console.log(json.token);
+                        // console.log(json.token);
                         setToken(json.token)
                         this.setState({redirect:true})
                     }
