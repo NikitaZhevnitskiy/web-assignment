@@ -27,7 +27,7 @@ router.post('/login', function(req, res) {
                 if(AuthService.compareHashes(passwordInput, user.password)){
                     // 4. hvis rett: lag token
                     const token = AuthService.generateToken(user.email);
-                    res.status(200).send(token);
+                    res.status(200).json({token:token});
                 } else {
 
                     // 3. hvis feil: 401 Unauthorized
