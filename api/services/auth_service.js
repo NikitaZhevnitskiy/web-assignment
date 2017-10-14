@@ -22,9 +22,11 @@ exports.generateToken = function (username) {
 };
 
 exports.decodeToken = function (token) {
-    const payload = jwtSimple.decode(token, jwtSecret);
-    if(payload){
-        return payload.username;
-    }
+    try {
+        const payload = jwtSimple.decode(token, jwtSecret);
+        if (payload) {
+            return payload.username;
+        }
+    }catch(err){}
     return null;
 };
