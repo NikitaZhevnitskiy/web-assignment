@@ -2,12 +2,6 @@ const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/test');
 const User = require('../models/user')
     , ObjectID = require('mongodb').ObjectID
-    , jwtSimple = require('jwt-simple') //TODO: move authentication
-    , bcrypt = require('bcryptjs')
-
-// exports.hash = function(password) {
-//     return bcrypt.hashSync(password, 10);
-// };
 
 exports.getAll = function({}, cb) {
     User.find((err, users) => {
@@ -36,4 +30,40 @@ exports.getUserByEmail = function(email, cb){
         if (err) cb(err);
         cb(null,user);
     })
+};
+
+exports.getList = function(email, cb){
+    User.findOne({'email':email}, (err, user) => {
+        if (err) cb(err);
+        cb(null,user.todolist);
+    })
+};
+
+exports.createItem=function (email, item, cb) {
+    console.log(email);
+    console.log(item);
+
+    User.findOne({'email':email}, (err, user) =>{
+        console.log(user)
+        if(err) cb(err)
+        user.todolist.push(item)
+        user.save((err,u)=>{
+            if(err)cb(err)
+            cb(null,u)
+        })
+    })
+};
+
+exports.deleteItem=function (email, item_id, cb) {
+    var id = new ObjectID(item_id);
+    console.log(id);
+    User.update({"email":email}, { $pull:{"todolist":{"_id":new ObjectID(item_id)}}}, function(err, data) {
+        if(err) cb(err)
+        cb(null,data)
+    })
+    // User.findOne({'email':email}, (err, user) =>{
+    //     // console.log(user)
+    //     if(err) cb(err)
+    //     cb(null,user)
+    // })
 };

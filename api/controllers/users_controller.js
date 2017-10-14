@@ -39,4 +39,48 @@ router.get('/', auth, function(req, res) {
     })
 });
 
+//TODO: handle all errors in list requests
+
+router.get('/list', auth, function (req, res) {
+    const email = AuthService.decodeToken(req.header('Authorization'));
+    UserRepository.getList(email, function (err, list) {
+        if(err) {
+            res.status(404).send(err);
+            return;
+        }
+        res.status(200).json({todolist:list});
+    })
+});
+router.put('/list', auth, function (req, res) {
+    const body = req.body;
+    const email = AuthService.decodeToken(req.header('Authorization'));
+    const item = {
+        title: body.title,
+        description: body.description
+    };
+
+    UserRepository.createItem(email, item, function (err, user) {
+        if(err) {
+            res.status(404).send(err);
+            return;
+        }
+        console.log(user)
+        res.status(200).send(user);
+    })
+});
+
+router.delete('/list',auth,function (req, res) {
+    const body = req.body;
+    const item_id = body._id;
+    const email = AuthService.decodeToken(req.header('Authorization'));
+    UserRepository.deleteItem(email,item_id, function (err,user) {
+        if(err) {
+            res.status(404).send(err);
+            return;
+        }
+        console.log(user)
+        res.status(200).send(user);
+    })
+})
+
 module.exports = router;
