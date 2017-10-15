@@ -92,9 +92,6 @@ class ItemList extends Component{
         return(
             <div className="list_component">
 
-                {console.log(this.props)}
-                {console.log(this.state)}
-
                 {/*Search feature*/}
                 <div className="list_input">
                     <input

@@ -58,7 +58,7 @@ class TodoContainer extends Component{
             }
         }).then(json => {
             var arr = json.todolist
-            console.log(arr);
+            // console.log(arr);
             this.setState({
                 items: arr
             })
