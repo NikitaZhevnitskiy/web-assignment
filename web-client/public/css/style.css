@@ -47,6 +47,9 @@
 /******************************
          LIST with ITEMS
 *******************************/
+.list_component{
+    width: 100%;
+}
 .list_item{
     border: 1px solid #e7e7e7;
     margin: 15px;
@@ -62,4 +65,5 @@
 
 .search_block {
     margin-bottom: 20px;
+    width: 100%;
 }
