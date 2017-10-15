@@ -62,6 +62,10 @@ class Login extends Component{
                             console.log("All ok 200")
                             return response.json()
                         }
+                        default:{
+                            console.log("goes wrong")
+                            return {}
+                        }
                     }
                 })
                 .then(json => {

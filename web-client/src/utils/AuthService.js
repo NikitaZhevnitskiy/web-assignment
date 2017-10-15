@@ -1,4 +1,3 @@
-import {Redirect} from 'react-router-dom'
 import history from '../history'
 import {URL_API_LOGGED_USER} from "./RoutesApi";
 
@@ -50,10 +49,14 @@ export function getUserInSystem(cb) {
                     console.log('All ok 200')
                     return response.json()
                 }
+                default: {
+                    console.log("default case")
+                    return {}
+                }
             }
         })
         .then(json => {
-            console.log(json)
+            // console.log(json)
             cb(json.email)
         })
 }

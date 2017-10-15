@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import TodoList from './TodoList'
 import {isLogged, getUserInSystem} from "../utils/AuthService";
 
 
@@ -28,6 +29,7 @@ class Home extends Component {
             return (
                 <div>
                     User in system: {this.state.userInSystem}
+                    <TodoList />
                 </div>
             )
         }
