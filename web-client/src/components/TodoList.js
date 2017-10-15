@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 // API routes
 import {URL_API_USER_LIST} from "../utils/RoutesApi";
 import {getTokenFromStorage} from "../utils/AuthService";
+import CreateItem from "./CreateItem";
 
 class TodoList extends Component {
 
@@ -61,19 +62,23 @@ class TodoList extends Component {
     render() {
         return (
              <div className="list_component">
-                 {/*<div className="list_input">*/}
-                     {/*<input*/}
-                         {/*value={this.state.keyword}*/}
-                         {/*type="text"*/}
-                         {/*placeholder="Search for a title"*/}
-                         {/*onChange={e=>this.searchItem(e)}*/}
-                     {/*/>*/}
-                 {/*</div>*/}
+                 <CreateItem />
 
+                 {/*Search feature*/}
+                 <div className="list_input">
+                     <input
+                         value={this.state.keyword}
+                         type="text"
+                         placeholder="Search for a title"
+                         onChange={e=>this.searchItem(e)}
+                     />
+                 </div>
+
+                 {/*LIST with items*/}
                 <div className="list_items">
-                    {/*{this.state.filtered.map(e=>console.log(e))}*/}
                     {this.renderItems()}
                 </div>
+
             </div>
         )
     }
@@ -90,10 +95,16 @@ class TodoList extends Component {
                     </div>
 
                     <button className="btn btn-danger"
-                             // onClick={(e)=> {
+                              onClick={(e)=> {
                         // e.preventDefault();
-                        //  fetch(`${URL_API_USER_LIST}/${item._id}`, {method: 'DELETE'})
-                             // .then(()=>this.getItems())}}
+                          fetch(`${URL_API_USER_LIST}/${item._id}`, {
+                              method: 'DELETE',
+                              headers: {
+                                  'Accept': 'application/json',
+                                  'Content-Type': 'application/json',
+                                  'Authorization': `${getTokenFromStorage()}`
+                              }
+                          }).then(()=>this.getItems())}}
                     >
                         Delete
                     </button>
@@ -102,22 +113,22 @@ class TodoList extends Component {
         })
     }
 
-    // searchItem = (event) => {
-    //     const keyword = event.target.value
-    //     if(keyword !== ''){
-    //         const list = this.state.items.filter((item)=>{
-    //             return item.title.toLowerCase().indexOf(keyword.toLowerCase()) > -1
-    //         })
-    //         this.setState({
-    //             filtered: list,
-    //             keyword
-    //         })
-    //     }else {
-    //         this.setState({
-    //             filtered:this.state.items,
-    //             keyword
-    //         })
-    //     }
-    // }
+    searchItem = (event) => {
+        const keyword = event.target.value
+        if(keyword !== ''){
+            const list = this.state.items.filter((item)=>{
+                return item.title.toLowerCase().indexOf(keyword.toLowerCase()) > -1
+            })
+            this.setState({
+                filtered: list,
+                keyword
+            })
+        }else {
+            this.setState({
+                filtered:this.state.items,
+                keyword
+            })
+        }
+    }
 }
 export default TodoList

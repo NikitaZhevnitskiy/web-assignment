@@ -69,9 +69,8 @@ router.put('/list', auth, function (req, res) {
     })
 });
 
-router.delete('/list',auth,function (req, res) {
-    const body = req.body;
-    const item_id = body._id;
+router.delete('/list/:id',auth,function (req, res) {
+    const item_id = req.params.id;
     const email = AuthService.decodeToken(req.header('Authorization'));
     UserRepository.deleteItem(email,item_id, function (err,user) {
         if(err) {
