@@ -28,7 +28,10 @@ class Home extends Component {
         if (this.state.loggedIn) {
             return (
                 <div>
-                    User in system: {this.state.userInSystem}
+                    <div className="panel panel-default">
+                        <div className="panel-heading">User in system:</div>
+                        <div className="panel-body">{this.state.userInSystem}</div>
+                    </div>
                     <TodoContainer />
                 </div>
             )
