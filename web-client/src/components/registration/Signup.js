@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { Redirect } from 'react-router-dom'
-import {URL_API_LOGIN} from "../utils/RoutesApi";
-import {setToken, isLogged} from '../utils/AuthService';
+import {URL_API_USERS} from '../../utils/RoutesApi'
+import {isLogged} from "../../utils/AuthService";
 
-class Login extends Component{
+
+class Signup extends Component {
+
     componentDidMount(){
         if(isLogged()){
             this.setState({redirect:true})
@@ -17,8 +19,8 @@ class Login extends Component{
         this.state = {
             email: "",
             password: "",
-            err:false,
-            redirect:false
+            err: false,
+            redirect: false
         };
     }
 
@@ -30,54 +32,32 @@ class Login extends Component{
         this.setState({
             [event.target.id]: event.target.value
         });
-    };
+    }
 
     handleSubmit = event => {
         event.preventDefault();
         this.setState({err: false});
         this.setState({redirect: false});
 
-        try {
-            fetch(URL_API_LOGIN, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.state)
+        fetch(URL_API_USERS, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state)
+        })
+            .then(response => {
+                console.log(response.status)
+                if (response.status === 401) {
+                    this.setState({err: true})
+                    return
+                }
+                if (response.status === 201) {
+                    this.setState({redirect: true})
+                }
             })
-                .then(response => {
-                    switch(response.status){
-                        case 401:{
-                            console.log("Error 401")
-                            this.setState({err: true})
-                            return {}
-                        }
-                        case 500:{
-                            console.log("Error 500")
-                            this.setState({err: true})
-                            return {}
-                        }
-                        case 200:{
-                            console.log("All ok 200")
-                            return response.json()
-                        }
-                        default:{
-                            console.log("goes wrong")
-                            return {}
-                        }
-                    }
-                })
-                .then(json => {
-                    if(json.token){
-                        // console.log(json.token);
-                        setToken(json.token)
-                        this.setState({redirect:true})
-                    }
-                })
-        }catch (err){this.setState({err:true})}
-    };
-
+    }
     render() {
         const {redirect}=this.state;
         if(redirect)
@@ -86,10 +66,10 @@ class Login extends Component{
             return(
                 <div>
                     <div>
-                        <h3>Login</h3>
+                        <h3>Signup</h3>
                         {this.state.err ?
                             <div className="alert alert-danger">
-                                <strong>Error:</strong> Check input fields
+                                <strong>Error:</strong> Invalid input. (check email & password fields)
                             </div>
                             : ""}
                     </div>
@@ -118,7 +98,7 @@ class Login extends Component{
                                 disabled={!this.validateForm()}
                                 type="submit"
                             >
-                                Login
+                                Signup
                             </Button>
                         </form>
                     </div>
@@ -126,8 +106,5 @@ class Login extends Component{
             )
         }
     }
-
-
 }
-
-export default Login;
+export default Signup;

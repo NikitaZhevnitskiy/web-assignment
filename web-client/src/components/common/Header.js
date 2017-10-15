@@ -1,5 +1,5 @@
 import React from 'react';
-import {logout, isLogged} from "../utils/AuthService";
+import {logout, isLogged} from "../../utils/AuthService";
 
 
 const Header = () => {

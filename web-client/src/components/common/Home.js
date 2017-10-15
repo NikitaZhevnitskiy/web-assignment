@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import TodoList from './TodoList'
-import {isLogged, getUserInSystem} from "../utils/AuthService";
+import TodoContainer from '../todolist/TodoContainer'
+import {isLogged, getUserInSystem} from "../../utils/AuthService";
 
 
 class Home extends Component {
@@ -29,7 +29,7 @@ class Home extends Component {
             return (
                 <div>
                     User in system: {this.state.userInSystem}
-                    <TodoList />
+                    <TodoContainer />
                 </div>
             )
         }

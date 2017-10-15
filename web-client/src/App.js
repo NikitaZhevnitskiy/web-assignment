@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {Router, Route, Switch, Redirect} from 'react-router-dom'
 import history from './history'
 // COMPONENTS
-import Header from './components/Header';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Home from './components/Home'
+import Header from './components/common/Header';
+import Login from './components/registration/Login';
+import Signup from './components/registration/Signup';
+import Home from './components/common/Home'
 //Stabs
 const NoMatch = () => <div>Page not found</div>;
 
