@@ -4,6 +4,10 @@ var express = require('express')
     , UserRepository = require('../repositories/user_repo')
     , AuthService = require('../services/auth_service');
 
+router.get('/hei',function (req, res) {
+    res.status(200).json({"ack":"true"})
+})
+
 router.post('/login', function(req, res) {
     const userBody = req.body;
     const emailInput = userBody.email+"";

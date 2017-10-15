@@ -1,4 +1,4 @@
-var routes = require('./api/controllers');
+var routes = require('./controllers');
 var express = require('express')
     , app = express()
     , bodyParser = require('body-parser')

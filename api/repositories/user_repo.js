@@ -1,5 +1,6 @@
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/test');
+const mongoose = require('mongoose');
+const host = process.env.DOCKER_DB==='app_mongodb' ? "app_mongodb" : "localhost"
+mongoose.connect(`mongodb://${host}/test`);
 const User = require('../models/user')
     , ObjectID = require('mongodb').ObjectID
 

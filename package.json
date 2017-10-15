@@ -12,6 +12,8 @@
     "mongoose": "^4.12.1"
   },
   "scripts": {
-    "dev-mongo": "concurrently mongod \"node server.js\""
+    "dev": "concurrently \"mongod\" \"npm run api\" \"npm run web-client\" ",
+    "api": "node ./api/server.js",
+    "web-client": "cd web-client && npm start"
   }
 }
