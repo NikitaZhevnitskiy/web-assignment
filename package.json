@@ -4,16 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.2",
-    "concurrently": "^3.5.0",
-    "express": "^4.16.2",
-    "jwt-simple": "^0.5.1",
-    "mongoose": "^4.12.1"
+    "concurrently": "^3.5.0"
   },
   "scripts": {
     "dev": "concurrently \"mongod\" \"npm run api\" \"npm run web-client\" ",
     "api": "node ./api/server.js",
-    "web-client": "cd web-client && npm start"
+    "web-client": "cd web-client && npm start",
+    "setup": "npm install && npm run apimodules && npm run clientmodules",
+    "apimodules": "cd api && npm install",
+    "clientmodules": "cd web-client && npm install"
   }
 }
