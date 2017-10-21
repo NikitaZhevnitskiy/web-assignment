@@ -1,4 +1,4 @@
-### How run 
+### How to run 
 
 #### Docker  
 * start  
@@ -7,4 +7,9 @@
 `docker-compose -f docker-compose.yml down --rmi all`  
 
 
-### How to stop
+#### Local
+* install  
+`npm run setup`  
+* start  
+`npm run dev`  
+
