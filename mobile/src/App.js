@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
-import {
-  Text,
-  View
-} from 'react-native';
+import React, {Component} from 'react';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+
+// middleware (to make dispatches (async actions in redux))
+import ReduxThunk from 'redux-thunk'
+import reducers from './reducers';
+import Router from './Router'
 
 class App extends Component {
-  render() {
-    return (
-      <View>
-        <Text>
-          Hallo
-        </Text>
-      </View>
-    );
-  }
+    render() {
+        const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+        return (
+            <Provider store={store}>
+                <Router/>
+            </Provider>
+        )
+    }
 }
 export default App;
