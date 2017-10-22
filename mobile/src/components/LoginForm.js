@@ -2,16 +2,24 @@ import React, {Component} from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import {Card, CardSection, Input, Button} from './common'
+import {emailChanged, passwordChanged} from "../actions/authentication/AuthActions";
 
 
 class LoginForm extends Component{
 
     renderButton(){
         return (
-            <Button whenPress={()=>console.log("button pressed")}>
+            <Button whenPress={this.onButtonPress.bind(this)}>
                 Login
             </Button>
         );
+    }
+
+    onButtonPress(){
+        const {email, password} = this.props;
+        console.log("button pressed")
+        //TODO: validation, request, token + rest crap
+
     }
 
     render(){
@@ -21,7 +29,7 @@ class LoginForm extends Component{
                     <Input
                         label="Email"
                         placeholder="email@gmail.com"
-                        onChangeText={()=>console.log("Email field changed")}
+                        onChangeText={this.onEmailChange.bind(this)}
                         value={this.props.email}
                     />
                 </CardSection>
@@ -31,7 +39,7 @@ class LoginForm extends Component{
                         secureTextEntry
                         label="Password"
                         placeholder="password"
-                        onChangeText={()=>console.log("Password field changed")}
+                        onChangeText={this.onPasswordChanged.bind(this)}
                         value={this.props.password}
                     />
                 </CardSection>
@@ -48,6 +56,9 @@ class LoginForm extends Component{
             </Card>
         )
     }
+
+    onEmailChange(text){this.props.emailChanged(text);}
+    onPasswordChanged(text){this.props.passwordChanged(text);}
 }
 
 const styles = {
@@ -58,4 +69,18 @@ const styles = {
     }
 };
 
-export default connect(null,null)(LoginForm);
+const mapStateToProps = state => {
+    return {
+        email: state.auth.email,
+        password: state.auth.password,
+        error: state.auth.error
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    {
+        emailChanged,
+        passwordChanged
+    })
+(LoginForm);

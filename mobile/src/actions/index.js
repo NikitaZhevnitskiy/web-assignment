@@ -1,1 +1,2 @@
-export * from './RegistrationActions'
+export * from './registration/RegistrationActions'
+export * from './authentication/AuthActions'
