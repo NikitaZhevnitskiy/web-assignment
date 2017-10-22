@@ -53,11 +53,17 @@ class Signup extends Component {
                     this.setState({err: true})
                     return
                 }
+                if (response.status === 409) {
+                    this.setState({err: true})
+                    return
+                }
                 if (response.status === 201) {
                     this.setState({redirect: true})
+                    return
                 }
             })
-    }
+    };
+
     render() {
         const {redirect}=this.state;
         if(redirect)
