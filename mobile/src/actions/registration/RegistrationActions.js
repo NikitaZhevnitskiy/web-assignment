@@ -5,12 +5,13 @@ import {
     PASSWORD_CHANGED,
     REGISTRATION_SUCCESS,
     VALID_EMAIL_PASSWORD,
-    NOT_VALID_EMAIL_PASSWORD
-} from './types'
+    NOT_VALID_EMAIL_PASSWORD,
+    NO_CONNECTION
+} from './registration_types'
 
 import {
     URL_API_USERS
-} from "./urls";
+} from "../../utils/urls";
 
 export const emailChanged = (text) => {
     return {
@@ -31,13 +32,15 @@ export const registerNewUser = ({email, password}) => {
 
         // 1 input validation
         if(valid(dispatch, email,password)){
+            dispatch({type:VALID_EMAIL_PASSWORD});
             const user = {email, password};
             // 2 request
             createUser(dispatch,user);
+        } else {
+            // 5 default
+            dispatch({type:NOT_VALID_EMAIL_PASSWORD});
         }
 
-        // 5 default
-        dispatch({type:VALID_EMAIL_PASSWORD});
     };
 
 };
@@ -73,11 +76,12 @@ const createUser=(dispatch, user)=>{
                 default:{
                     // 4 res fail
                     dispatch({type: NOT_VALID_EMAIL_PASSWORD});
+                    return
                 }
             }
         })
         .catch(()=>{
-            dispatch({type:VALID_EMAIL_PASSWORD});
+            dispatch({type: NO_CONNECTION})
         })
 };
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import {Card, CardSection, Input, Button} from './common'
-import {emailChanged, passwordChanged, registerNewUser} from "../actions/index";
+import {emailChanged, passwordChanged, registerNewUser} from "../actions/registration/RegistrationActions";
 
 
 class RegistrationForm extends Component{

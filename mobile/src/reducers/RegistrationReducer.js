@@ -3,8 +3,9 @@ import {
     PASSWORD_CHANGED,
     REGISTRATION_SUCCESS,
     VALID_EMAIL_PASSWORD,
-    NOT_VALID_EMAIL_PASSWORD
-} from '../actions/types'
+    NOT_VALID_EMAIL_PASSWORD,
+    NO_CONNECTION
+} from '../actions/registration/registration_types'
 
 const INITIAL_STATE = {
     email:'',
@@ -14,8 +15,6 @@ const INITIAL_STATE = {
 };
 
 export default (state=INITIAL_STATE, action)=>{
-    // main debug
-    console.log(action);
 
     switch(action.type){
         case EMAIL_CHANGED: {
@@ -32,6 +31,9 @@ export default (state=INITIAL_STATE, action)=>{
         }
         case NOT_VALID_EMAIL_PASSWORD:{
             return { ... state, error:'Email or Password not valid'}
+        }
+        case NO_CONNECTION: {
+            return { INITIAL_STATE, error:'Server out of service'}
         }
 
 
