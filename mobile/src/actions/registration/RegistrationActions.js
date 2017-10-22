@@ -31,7 +31,7 @@ export const registerNewUser = ({email, password}) => {
     return (dispatch) => {
 
         // 1 input validation
-        if(valid(dispatch, email,password)){
+        if(valid(email,password)){
             dispatch({type:VALID_EMAIL_PASSWORD});
             const user = {email, password};
             // 2 request
@@ -45,7 +45,7 @@ export const registerNewUser = ({email, password}) => {
 
 };
 
-const valid = (dispatch, email, password) => {
+const valid = (email, password) => {
     if (email.length >= 5 &&
         email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) &&
         password.length >= 6)

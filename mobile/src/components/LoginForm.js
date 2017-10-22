@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import {Card, CardSection, Input, Button} from './common'
-import {emailChanged, passwordChanged} from "../actions/authentication/AuthActions";
+import {emailChanged, passwordChanged, loginUser} from "../actions/authentication/AuthActions";
 
 
 class LoginForm extends Component{
@@ -16,10 +16,9 @@ class LoginForm extends Component{
     }
 
     onButtonPress(){
-        const {email, password} = this.props;
-        console.log("button pressed")
-        //TODO: validation, request, token + rest crap
-
+        const { email, password } = this.props;
+        const emailLowerCase = email.toLowerCase();
+        this.props.loginUser({email:emailLowerCase,password});
     }
 
     render(){
@@ -81,6 +80,7 @@ export default connect(
     mapStateToProps,
     {
         emailChanged,
-        passwordChanged
+        passwordChanged,
+        loginUser
     })
 (LoginForm);
