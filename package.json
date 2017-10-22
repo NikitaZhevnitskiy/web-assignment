@@ -10,8 +10,9 @@
     "dev": "concurrently \"mongod\" \"npm run api\" \"npm run web-client\" ",
     "api": "node ./api/server.js",
     "web-client": "cd web-client && npm start",
-    "setup": "npm install && npm run apimodules && npm run clientmodules",
+    "setup": "npm install && npm run apimodules && npm run clientmodules && npm run mobilemodules",
     "apimodules": "cd api && npm install",
-    "clientmodules": "cd web-client && npm install"
+    "clientmodules": "cd web-client && npm install",
+    "mobilemodules": "cd mobile && npm install"
   }
 }
