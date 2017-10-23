@@ -105,9 +105,9 @@ const styles = {
 const mapStateToProps = state => {
     return {
         token: state.auth.token,
-        title: state.todolist.title,
-        description: state.todolist.description,
-        error: state.todolist.error
+        title: state.todo_item.title,
+        description: state.todo_item.description,
+        error: state.todo_item.error
     };
 };
 

@@ -1,46 +1,44 @@
-import React, {Component} from 'react';
-import {
-    Text,
-    View
-} from 'react-native';
-import {CardSection, Button} from "../common";
-// import { connect } from 'react-redux';
+import React from 'react';
+import { Text, View } from 'react-native';
+import { CardSection, Button } from "../common";
 
-class ListItem extends Component {
+const ListItem = (props)=> {
 
-    render(){
-        const {item} = this.props;
-        return(
-            <View key={item._id} style={styles.itemBoxStyle}>
+    const {item,whenPress} = props;
 
-                {/*Title*/}
-                <CardSection>
-                    <Text style={styles.titleStyle}>
-                        {item.title}
-                    </Text>
-                </CardSection>
+    return(
+        <View key={item._id} style={styles.itemBoxStyle}>
 
-                {/*Description*/}
-                <CardSection>
-                    <Text
-                        style={{flex:1}}
-                        adjustsFontSizeToFit={true}
-                    >
-                        {item.description}
-                    </Text>
-                </CardSection>
+            {/*Title*/}
+            <CardSection>
+                <Text style={styles.titleStyle}>
+                    {item.title}
+                </Text>
+            </CardSection>
 
-                {/*Button*/}
-                <CardSection>
-                    <Button>
-                        Complete
-                    </Button>
-                </CardSection>
+            {/*Description*/}
+            <CardSection>
+                <Text
+                    style={{flex:1}}
+                    adjustsFontSizeToFit={true}
+                >
+                    {item.description}
+                </Text>
+            </CardSection>
 
-            </View>
-        )
-    }
-}
+            {/*Button*/}
+            <CardSection>
+                <Button
+                    whenPress={whenPress}
+                >
+                    Complete
+                </Button>
+            </CardSection>
+
+        </View>
+    )
+
+};
 
 const styles = {
     titleStyle:{

@@ -81,10 +81,4 @@ const newItem=(dispatch, item, token)=>{
     })
 };
 
-export const getItems = (token) => {
-    return (dispatch) => {
-
-    };
-
-};
 
