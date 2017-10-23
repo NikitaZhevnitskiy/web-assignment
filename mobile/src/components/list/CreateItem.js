@@ -43,16 +43,14 @@ class CreateItem extends Component{
 
                 <CardSection>
                     <View style={styles.containerStyle}>
-                        <Text style={styles.labelStyle}>Label</Text>
+                        <Text style={styles.labelStyle}>Description</Text>
                         <TextInput
-                            multiline={true}
-                            autoGrow={true}
                             numberOfLines={6}
                             placeholder="placeholder"
-                            autoCorrect={false}
                             value={this.props.description}
                             onChangeText={this.onDescriptionChange.bind(this)}
                             style={styles.inputStyle}
+                            multiline={true}
                         />
                     </View>
                 </CardSection>
