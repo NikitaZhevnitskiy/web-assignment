@@ -1,10 +1,14 @@
 import {
     NO_CONNECTION,
-    GET_ITEMS
+    GET_ITEMS,
+    FILTERING
 } from '../actions/todolist/list_types'
 const INITIAL_STATE = {
     list:[],
-    error: ''
+    filtered:[],
+    error: '',
+    keyword:'',
+
 };
 
 export default (state=INITIAL_STATE, action)=>{
@@ -16,7 +20,9 @@ export default (state=INITIAL_STATE, action)=>{
         case NO_CONNECTION: {
             return { INITIAL_STATE, error:'Server out of service'}
         }
-
+        case FILTERING: {
+            return { ...state, keyword:action.payload.keyword, filtered:action.payload.filtered }
+        }
 
         default:
             return state;

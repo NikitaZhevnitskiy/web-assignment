@@ -4,7 +4,7 @@ import { Card } from '../common';
 import ListItem from './ListItem';
 import { SearchBar } from 'react-native-elements';
 import { ScrollView, StyleSheet } from 'react-native';
-import { getItems, deleteItem } from "../../actions/todolist/ListActions";
+import { getItems, deleteItem, filtering } from "../../actions/todolist/ListActions";
 
 class ListComponent extends Component{
 
@@ -21,21 +21,38 @@ class ListComponent extends Component{
         this.props.getItems(this.props.token);
     }
 
+    onFilter(text){
+        console.log("field change: "+text);
+        this.props.filtering(text, this.props.items)
+    }
+
+
+    // renderItems(){
+    //     this.props.items.map(item => {
+    //         return <ListItem
+    //             item={item}
+    //             key={item._id}
+    //             whenPress={()=>this.onCompleteButtonPress(item._id)}
+    //         />
+    //     })
+    // }
+
     render(){
         return(
             <Card>
                 <SearchBar
                     lightTheme
-                    onChangeText={()=>console.log("keyword")}
+                    onChangeText={this.onFilter.bind(this)}
+                    value={this.props.keyword}
                     placeholder='Type Here...' />
 
                 <ScrollView contentContainerStyle={styles.contentContainer}>
                     {this.props.items.map(item => {
-                       return <ListItem
-                                   item={item}
-                                   key={item._id}
-                                   whenPress={()=>this.onCompleteButtonPress(item._id)}
-                                />
+                        return <ListItem
+                            item={item}
+                            key={item._id}
+                            whenPress={()=>this.onCompleteButtonPress(item._id)}
+                        />
                     })}
                 </ScrollView>
             </Card>
@@ -51,11 +68,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        token: state.auth.token,
-        items: state.todo_list.list,
-        filtered:state.todo_list.list,
-        keyword: '',
-        error: state.todo_list.error
+        token:    state.auth.token,
+        items:    state.todo_list.list,
+        filtered: state.todo_list.filtered,
+        keyword:  state.todo_list.keyword,
+        error:    state.todo_list.error
     };
 };
 
@@ -63,7 +80,8 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps,
     {
         getItems,
-        deleteItem
+        deleteItem,
+        filtering
     }
 )
 (ListComponent);

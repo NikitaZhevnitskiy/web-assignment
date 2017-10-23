@@ -6,3 +6,4 @@ export const VALID_TITLE_DESCRIPTION = `${prefix}valid_title_description`;
 export const NOT_VALID_TITLE_DESCRIPTION = `${prefix}not_valid_title_description`;
 export const GET_ITEMS = `${prefix}get_items`;
 export const NO_CONNECTION = `${prefix}no_connection`;
+export const FILTERING = `${prefix}filtering`;

@@ -1,13 +1,37 @@
-import {Actions} from 'react-native-router-flux';
 
 import {
     NO_CONNECTION,
-    GET_ITEMS
+    GET_ITEMS,
+    FILTERING
 } from './list_types'
 
 import {
     URL_API_USER_LIST
 } from '../../utils/urls';
+
+export const filtering = (keyword,items) => {
+    // double validation for safety
+
+    if(keyword === '' || keyword === 'undefined'){
+        return {
+            type: FILTERING,
+            payload: {filtered:items,keyword}
+        }
+    }
+    //     // filtering
+    //     const filtered = items.filter((item)=>{
+    //         return item.title.toLowerCase().indexOf(keyword.toLowerCase()) > -1
+    //     });
+    //
+    //     console.log(filtered);
+    //
+    return {
+        type: FILTERING,
+        payload: {filtered:[],keyword}
+    }
+
+
+};
 
 export const getItems = (token) => {
     return (dispatch) => {
