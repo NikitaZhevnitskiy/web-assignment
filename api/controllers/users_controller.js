@@ -65,7 +65,7 @@ router.put('/list', auth, function (req, res) {
             return;
         }
         console.log(user)
-        res.status(200).json({todolist:user.todolist});
+        res.status(201).json({todolist:user.todolist});
     })
 });
 
