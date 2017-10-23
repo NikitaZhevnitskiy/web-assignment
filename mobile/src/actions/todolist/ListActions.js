@@ -49,9 +49,15 @@ export const getItems = (token) => {
 
 export const deleteItem = (token, itemId) => {
     return (dispatch) => {
-
+        fetch(`${URL_API_USER_LIST}/${itemId}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        }).catch(()=>{
+            dispatch({type: NO_CONNECTION})
+        })
     };
 };
-
-
-

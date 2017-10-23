@@ -4,19 +4,24 @@ import { Card } from '../common';
 import ListItem from './ListItem';
 import { SearchBar } from 'react-native-elements';
 import { ScrollView, StyleSheet } from 'react-native';
-import { getItems } from "../../actions/todolist/ListActions";
-
-import mockedItems from './items'
+import { getItems, deleteItem } from "../../actions/todolist/ListActions";
 
 class ListComponent extends Component{
 
     componentDidMount(){
         this.props.getItems(this.props.token);
-        console.log(this.props.items)
+        // console.log(this.props.items)
+    }
+
+    onCompleteButtonPress(itemId){
+        const {token} = this.props;
+        // delete
+        this.props.deleteItem(token,itemId);
+        // update list
+        this.props.getItems(this.props.token);
     }
 
     render(){
-        // const items = mockedItems;
         return(
             <Card>
                 <SearchBar
@@ -26,7 +31,11 @@ class ListComponent extends Component{
 
                 <ScrollView contentContainerStyle={styles.contentContainer}>
                     {this.props.items.map(item => {
-                       return <ListItem item={item} key={item._id} whenPress={()=>console.log(item._id)}/>
+                       return <ListItem
+                                   item={item}
+                                   key={item._id}
+                                   whenPress={()=>this.onCompleteButtonPress(item._id)}
+                                />
                     })}
                 </ScrollView>
             </Card>
@@ -53,7 +62,8 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps,
     {
-        getItems
+        getItems,
+        deleteItem
     }
 )
 (ListComponent);
