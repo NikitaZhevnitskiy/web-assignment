@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import { Actions } from 'react-native-router-flux';
-import {Card, CardSection, Button, Input} from '../common';
+import { connect } from 'react-redux';
+import { Card } from '../common';
 import ListItem from './ListItem';
 import { SearchBar } from 'react-native-elements';
 import { ScrollView, StyleSheet } from 'react-native';
+import {} from "../../actions/todolist/CreateItemActions";
 
 import mockedItems from './items'
 
-class List extends Component{
+class ListComponent extends Component{
 
     render(){
 
@@ -35,4 +36,16 @@ const styles = StyleSheet.create({
     }
 });
 
-export default List
+const mapStateToProps = state => {
+    return {
+        token: state.auth.token
+    };
+};
+
+
+export default connect(mapStateToProps,
+    {
+
+    }
+)
+(ListComponent);

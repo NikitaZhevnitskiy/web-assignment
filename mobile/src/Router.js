@@ -3,7 +3,7 @@ import { Stack, Scene, Router } from 'react-native-router-flux';
 import InitialScreen from "./components/InitialScreen";
 import RegistrationForm from "./components/RegistrationForm";
 import LoginForm from "./components/LoginForm";
-import List from "./components/list/ListComponent";
+import ListComponent from "./components/list/ListComponent";
 import { Actions } from 'react-native-router-flux';
 import CreateItem from './components/list/CreateItem';
 
@@ -22,7 +22,7 @@ const RouterComponent = () => {
                 <Stack key="todo">
                     <Scene
                         key="list"
-                        component={List}
+                        component={ListComponent}
                         title="ToDo list"
                         onLeft={()=>console.log("logout pressed")}
                         leftTitle="Logout"

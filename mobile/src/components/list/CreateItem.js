@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import {Card, CardSection, Input, Button} from '../common'
 import {TextInput,View} from 'react-native';
-import {titleChanged, descriptionChanged, createItem} from "../../actions/todolist/ToDoListActions";
+import {titleChanged, descriptionChanged, createItem} from "../../actions/todolist/CreateItemActions";
 
 
 

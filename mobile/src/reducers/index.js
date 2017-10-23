@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import RegistrationReducer from './RegistrationReducer';
 import AuthReducer from './AuthReducer';
-import ToDoListReducer from './ToDoListReducer';
+import ToDoListReducer from './CreateItemReducer';
 
 export default combineReducers({
     registration: RegistrationReducer,
