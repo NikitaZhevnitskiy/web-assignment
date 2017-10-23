@@ -5,7 +5,8 @@ import {
     LOGIN_SUCCESS,
     PASSWORD_CHANGED,
     NOT_VALID_EMAIL_PASSWORD,
-    NO_CONNECTION
+    NO_CONNECTION,
+    LOG_OUT
 } from './auth_types'
 
 import {
@@ -24,6 +25,13 @@ export const passwordChanged = (text) => {
         type: PASSWORD_CHANGED,
         payload: text
     }
+};
+
+export const logout = () => {
+    Actions.auth();
+    return {
+        type: LOG_OUT
+    };
 };
 
 export const loginUser = ({email, password}) => {

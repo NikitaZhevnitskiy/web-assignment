@@ -6,6 +6,8 @@ import LoginForm from "./components/LoginForm";
 import ListComponent from "./components/list/ListComponent";
 import { Actions } from 'react-native-router-flux';
 import CreateItem from './components/list/CreateItem';
+import { logout } from './actions/authentication/AuthActions'
+// import { connect } from 'react-redux';
 
 
 
@@ -24,7 +26,7 @@ const RouterComponent = () => {
                         key="list"
                         component={ListComponent}
                         title="ToDo list"
-                        onLeft={()=>console.log("logout pressed")}
+                        onLeft={()=>logout()}
                         leftTitle="Logout"
                         onRight={()=> Actions.createItem()}
                         rightTitle="Add"
@@ -40,4 +42,6 @@ const RouterComponent = () => {
         </Router>
     );
 };
+
+// export default connect(null, {logout})(RouterComponent);
 export default RouterComponent;

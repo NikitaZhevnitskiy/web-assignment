@@ -4,6 +4,7 @@ import {
     VALID_EMAIL_PASSWORD,
     NOT_VALID_EMAIL_PASSWORD,
     LOGIN_SUCCESS,
+    LOG_OUT,
     NO_CONNECTION
 } from '../actions/authentication/auth_types'
 
@@ -32,9 +33,11 @@ export default (state=INITIAL_STATE, action)=>{
         case NOT_VALID_EMAIL_PASSWORD:{
             return { ... state, error:'Email or Password not valid'}
         }
-        //TODO: token store
         case LOGIN_SUCCESS: {
-            return { ... state, password: '', error:'', token: action.payload }
+            return { ... state, password: '', error:'', email:'', token: action.payload }
+        }
+        case LOG_OUT: {
+            return {... state, INITIAL_STATE, email:'',token:''}
         }
         case NO_CONNECTION: {
             return { INITIAL_STATE, error:'Server out of service'}
