@@ -42,10 +42,13 @@ export const registerNewUser = ({email, password}) => {
         }
 
     };
-
 };
 
 const valid = (email, password) => {
+    // undefined validation
+    if(!email || !password)return false;
+
+    // rest validation
     if (email.length >= 5 &&
         email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) &&
         password.length >= 6)

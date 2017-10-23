@@ -49,9 +49,16 @@ export const createItem = (title, description, token) => {
 };
 
 const valid = (title, description) => {
-    if (title.length >= 1 && description.length >= 1) {
-        return true
+    //validate for undefined
+    if (title && description){
+        //rest validation
+        if (
+            title.length >= 1 &&
+            description.length >= 1) {
+            return true
+        }
     }
+
     return false
 };
 
