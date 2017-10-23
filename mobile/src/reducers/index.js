@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux';
 import RegistrationReducer from './RegistrationReducer';
 import AuthReducer from './AuthReducer';
-import ToDoListReducer from './CreateItemReducer';
+import CreateItemReducer from './CreateItemReducer';
+import ListReducer from './ListReducer';
 
 export default combineReducers({
     registration: RegistrationReducer,
     auth: AuthReducer,
-    todolist: ToDoListReducer
+    todo_item: CreateItemReducer,
+    todo_list: ListReducer
 });
