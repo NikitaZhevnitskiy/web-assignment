@@ -20,10 +20,13 @@ OR
 | Status          | Description | Improvement
 | ----- | ----- | ----- |
 | +  |  Same functionality as web-client | |
-| -  |  Complexity | Practise more|
+| -  |  Complexity, bugs | Practise more & bug hunting|
+| +/-  | Store toke as state in reducer | Use async storage for it (possible solution)|
+| +/-  | Error handling |Elaborate more on it|
 | +/-  |  Project structure | Could be better, again practise|
-| +  |  Redux, react-redux, redux-thunk| Practise more |
-| +  |  Routing with react-native-router-flux | Read documentation |
+| +  |  Redux, react-redux, redux-thunk| Practise more, refactor reducers by small peaces |
+| +  |  I think it was good solution use react component as a buffer zone to transfer state from one reducer to another. It low-coupling between reducers. Example is token which need to be transfered from one reducer to action and produce new state in another reducer |  |
+| +  |  Routing with react-native-router-flux | Read documentation, especially for Stack component and MobX-friendly (observable for state) |
 | -  |  Logout does not work properly, and reason is button belongs to Header which is child of Route elements. Issue how to connect Route to redux  | Implement custom header, extends from react component, connect to redux. Or connect Route directly to redux (has some issues with it) |
 
 

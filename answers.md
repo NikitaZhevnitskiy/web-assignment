@@ -1,5 +1,5 @@
 # Answers (Discussion)
-1. Hva er noen fordeler og ulemper ved å benytte en stack bygget på kun JavaScript?   
+## 1. Hva er noen fordeler og ulemper ved å benytte en stack bygget på kun JavaScript?   
 `Advantages`   
 There several advantages using only JavaScript in build stack. 
 Developers can work in several layers of build stack, which make them universal.
@@ -22,7 +22,7 @@ Performance of MongoDB general is lower than Postgres or MySQL.
 Developers tied to one programming language. Huge amount of library can be found to solving one exact problem, 
 sometimes it is difficult to find good quality library.  
   
-2. Hva er et (web-)API, og hva er noen fordeler og ulemper ved å lage et? Når bør man ikke lage et API?  
+## 2. Hva er et (web-)API, og hva er noen fordeler og ulemper ved å lage et? Når bør man ikke lage et API?  
 API is Application Programming Interface. It is documented way for one application to communicate with another. 
 A Web API communicate through REQUESTS & RESPONSES. There are two famous approaches: 
 * REST (Representational State Transfer)  
@@ -46,8 +46,11 @@ Solution is to build Responsive, Resilient, Elastic, Message Driven APIs. One of
 When you should not build API. The first case when your application does not provide access to its resources.
 The second case is transfer or analyze streaming data.
 
+## 3. Hva er noen fordeler og ulemper ved å sende et token (som JSON Web Token) via en HTTPheader (som Authorization) kontra å bruke en Cookie?
 
-### Sources
+## 4. Hva er hensikten med REpresentational State Transfer (REST)? Hva er noen fordeler og ulemper med å implementere nivå 2 og 3 av REST i Richardson Maturity Model?
+
+## Sources
 [Quora](https://www.quora.com/What-are-the-pros-and-cons-of-MEAN-javascript-stack-vs-LAMP-stack)  
 [Altexsoft](https://www.altexsoft.com/blog/engineering/the-good-and-the-bad-of-javascript-full-stack-development/)
 [BBVA](https://bbvaopen4u.com/en/actualidad/rest-api-what-it-and-what-are-its-advantages-project-development)
