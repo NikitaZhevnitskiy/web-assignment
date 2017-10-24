@@ -16,7 +16,7 @@ OR
 2. When the error appears, run "npm install"  
 3. Then run "react-native run-ios" again.  
 
-### Advantages, disadvantages & improvements
+## Advantages, disadvantages & improvements
 | Status          | Description | Improvement
 | ----- | ----- | ----- |
 | +  |  Same functionality as web-client | |
