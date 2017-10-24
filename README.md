@@ -16,5 +16,5 @@
 ## Reports
 #### [Report API](./api/README.md)
 #### [Report Web-client](./web-client/README.md)
-#### [Report Mobile-client]()
+#### [Report Mobile-client](./mobile/README.md)
 #### [Answers on questions](./answers.md)
