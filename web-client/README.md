@@ -1,16 +1,16 @@
 
 # Report Web-client
-* Screenshot  
-\#1
-![img](./screenshots/screen1.png) 
-\#2   
+### Screenshots  
+\#1  
+![img](./screenshots/screen1.png)  
+\#2     
 ![img](./screenshots/screen2.png)  
 \#3  
 ![img](./screenshots/screen3.png)  
-\#4
+\#4  
 ![img](./screenshots/screen4.png)  
-\#5
-![img](./screenshots/screen5.png) 
+\#5  
+![img](./screenshots/screen5.png)  
 ### Comments  
 I have done all tasks including bonus tasks: use ESLint and Search feature.  
 I also rebuild web-client and now after deleting list-item, 
