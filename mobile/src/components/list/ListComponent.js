@@ -23,16 +23,10 @@ class ListComponent extends Component{
     }
 
     onKeyWordChange(text){
-        // console.log("LIST_COMPONENT items___________");
-        // this.props.items.map(i=>console.log(i));
-        // console.log("LIST_COMPONENT___________");
-
         this.props.keyWordChange(text, this.props.items);
     }
 
     render(){
-        // console.log(this.props.keyword);
-
         return(
             <Card>
                 <SearchBar

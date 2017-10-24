@@ -10,16 +10,7 @@ import {
 } from '../../utils/urls';
 
 export const keyWordChange = (keyword,items) => {
-    // console.log("ACTIONS keyword___________");
-    // console.log(keyword);
-    // console.log("ACTIONS items BEFORE filtrating___________");
-    // items.map(i=>console.log(i));
-
     const filtered= searchItems(keyword,items);
-
-    // console.log("ACTIONS filtered ___________");
-    // filtered.map(i=>console.log(i));
-
     return {
         type: KEY_WORD_CHANGED,
         payload: {keyword, filtered}

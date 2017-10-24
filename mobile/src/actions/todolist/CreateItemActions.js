@@ -63,8 +63,6 @@ const valid = (title, description) => {
 };
 
 const newItem=(dispatch, item, token)=>{
-    // console.log("request mocked")
-
     fetch(URL_API_USER_LIST, {
         method: 'PUT',
         headers: {
@@ -77,7 +75,7 @@ const newItem=(dispatch, item, token)=>{
         switch(res.status){
             case 201: {
                 dispatch({type:ITEM_CREATED});
-                Actions.list()
+                Actions.list();
                 return
             }
             default: {

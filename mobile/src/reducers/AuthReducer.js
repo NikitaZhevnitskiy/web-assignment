@@ -31,7 +31,7 @@ export default (state=INITIAL_STATE, action)=>{
             return { ... state, error:''}
         }
         case NOT_VALID_EMAIL_PASSWORD:{
-            return { ... state, error:'Email or Password not valid'}
+            return { ... state, error:'Email or Password not valid', password:''}
         }
         case LOGIN_SUCCESS: {
             return { ... state, password: '', error:'', email:'', token: action.payload }
