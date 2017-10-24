@@ -2,38 +2,42 @@
 import {
     NO_CONNECTION,
     GET_ITEMS,
-    FILTERING
+    KEY_WORD_CHANGED
 } from './list_types'
 
 import {
     URL_API_USER_LIST
 } from '../../utils/urls';
 
-export const filtering = (keyword,items) => {
-    // double validation for safety
+export const keyWordChange = (keyword,items) => {
+    // console.log("ACTIONS keyword___________");
+    // console.log(keyword);
+    // console.log("ACTIONS items BEFORE filtrating___________");
+    // items.map(i=>console.log(i));
 
-    if(keyword === '' || keyword === 'undefined'){
-        return {
-            type: FILTERING,
-            payload: {filtered:items,keyword}
-        }
-    }
-    //     // filtering
-    //     const filtered = items.filter((item)=>{
-    //         return item.title.toLowerCase().indexOf(keyword.toLowerCase()) > -1
-    //     });
-    //
-    //     console.log(filtered);
-    //
+    const filtered= searchItems(keyword,items);
+
+    // console.log("ACTIONS filtered ___________");
+    // filtered.map(i=>console.log(i));
+
     return {
-        type: FILTERING,
-        payload: {filtered:[],keyword}
+        type: KEY_WORD_CHANGED,
+        payload: {keyword, filtered}
     }
-
-
 };
 
-export const getItems = (token) => {
+const searchItems = (key,items) => {
+    if(key !== '' || key !== 'undefined') {
+        return items.filter((item) => {
+            return item.title.toLowerCase().indexOf(key.toLowerCase()) > -1
+        });
+    }
+    return items
+};
+
+
+export const getItems = (token, keyword) => {
+    console.log("keyword in action ->"+keyword+".");
     return (dispatch) => {
         fetch(URL_API_USER_LIST, {
             method: 'GET',
@@ -54,22 +58,21 @@ export const getItems = (token) => {
                 }
             }
         }).then(json => {
-            if(json.todolist){
-                var arr = json.todolist;
-                dispatch({type:GET_ITEMS, payload:arr})
-            } else {
-                dispatch({type:GET_ITEMS, payload:[]})
+
+            if(json.todolist) {
+                var items = json.todolist;
+                var filtered = keyword==='' ? items: searchItems(keyword,items);
+                // dancing
+                dispatch({type: GET_ITEMS, payload:{items,filtered}})
             }
         }).catch(()=>{
                 dispatch({type: NO_CONNECTION})
-            })
-
-
-
-        // dispatch({type:GET_ITEMS, payload: [{title:"hei man",description:"super description", _id:"43wdferdfgd"}]})
+        })
     };
 
 };
+
+
 
 export const deleteItem = (token, itemId) => {
     return (dispatch) => {

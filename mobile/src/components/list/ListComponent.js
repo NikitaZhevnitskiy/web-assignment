@@ -4,56 +4,55 @@ import { Card } from '../common';
 import ListItem from './ListItem';
 import { SearchBar } from 'react-native-elements';
 import { ScrollView, StyleSheet } from 'react-native';
-import { getItems, deleteItem, filtering } from "../../actions/todolist/ListActions";
+import { getItems, deleteItem, keyWordChange } from "../../actions/todolist/ListActions";
 
 class ListComponent extends Component{
 
     componentDidMount(){
-        this.props.getItems(this.props.token);
-        // console.log(this.props.items)
+        // initial
+        this.props.getItems(this.props.token, this.props.keyword);
     }
+
 
     onCompleteButtonPress(itemId){
         const {token} = this.props;
         // delete
         this.props.deleteItem(token,itemId);
         // update list
-        this.props.getItems(this.props.token);
+        this.props.getItems(this.props.token, this.props.keyword);
     }
 
-    onFilter(text){
-        console.log("field change: "+text);
-        this.props.filtering(text, this.props.items)
+    onKeyWordChange(text){
+        // console.log("LIST_COMPONENT items___________");
+        // this.props.items.map(i=>console.log(i));
+        // console.log("LIST_COMPONENT___________");
+
+        this.props.keyWordChange(text, this.props.items);
     }
-
-
-    // renderItems(){
-    //     this.props.items.map(item => {
-    //         return <ListItem
-    //             item={item}
-    //             key={item._id}
-    //             whenPress={()=>this.onCompleteButtonPress(item._id)}
-    //         />
-    //     })
-    // }
 
     render(){
+        // console.log(this.props.keyword);
+
         return(
             <Card>
                 <SearchBar
                     lightTheme
-                    onChangeText={this.onFilter.bind(this)}
-                    value={this.props.keyword}
+                    onChangeText={this.onKeyWordChange.bind(this)}
+                    value={this.props.keyword || ''}
                     placeholder='Type Here...' />
 
                 <ScrollView contentContainerStyle={styles.contentContainer}>
-                    {this.props.items.map(item => {
-                        return <ListItem
-                            item={item}
-                            key={item._id}
-                            whenPress={()=>this.onCompleteButtonPress(item._id)}
-                        />
-                    })}
+
+                    {
+                        this.props.filtered.map(item => {
+                            return <ListItem
+                                item={item}
+                                key={item._id}
+                                whenPress={()=>this.onCompleteButtonPress(item._id)}
+                            />
+                        })
+                    }
+
                 </ScrollView>
             </Card>
         );
@@ -81,7 +80,8 @@ export default connect(mapStateToProps,
     {
         getItems,
         deleteItem,
-        filtering
+        keyWordChange,
+
     }
 )
 (ListComponent);

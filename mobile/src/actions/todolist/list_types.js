@@ -7,3 +7,4 @@ export const NOT_VALID_TITLE_DESCRIPTION = `${prefix}not_valid_title_description
 export const GET_ITEMS = `${prefix}get_items`;
 export const NO_CONNECTION = `${prefix}no_connection`;
 export const FILTERING = `${prefix}filtering`;
+export const KEY_WORD_CHANGED = `${prefix}key_word_changed`;
