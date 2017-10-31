@@ -47,6 +47,19 @@ When you should not build API. The first case when your application does not pro
 The second case is transfer or analyze streaming data.
 
 ## 3. Hva er noen fordeler og ulemper ved å sende et token (som JSON Web Token) via en HTTPheader (som Authorization) kontra å bruke en Cookie?
+Token-based authentication is stateless, server does not need to keep a record.
+Cookie based authentication is stateful, which means that session must be kept both server and client-side.
+Token contain all required data for validation and user info: user_id, role, expire date, etc... 
+Back-end systems with token-based authentication generate token on successful login and that incoming tokens are valid.
+Token management across different domains with CORS is trivial comparing with managing cookies with cross domain.
+Token-based authentication has lower performance than cookie-based because during the validation process, back-end system 
+has to query database. Token-based authentication is easy to implement for services that do not have a concept of a cookie store: mobile clients, IoT.
+The size of Jwt can be big depends on amount of claims inside, that can affect performance on each call. 
+Common question also is where to store token. There are several options: 
+local storage, cookie(limited with 4Kb) and sessionStorage(clear it after browser closed).
+If token stored in local/session storage, than it won't work across domains, which makes token-based auth secured.
+Additional complexity If you store confidential info in token it should be encrypted.    
+ 
 
 ## 4. Hva er hensikten med REpresentational State Transfer (REST)? Hva er noen fordeler og ulemper med å implementere nivå 2 og 3 av REST i Richardson Maturity Model?
 

@@ -1,4 +1,4 @@
-## Report Web-client 
+## Report Mobile-client 
 :fire::triumph::fire:
 ### How to start  
 1. Run api from project root  
