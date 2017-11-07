@@ -2,13 +2,8 @@ var express = require('express')
     , router = express.Router()
     , Validator = require('../helpers/validator')
     , auth = require('../middlewares/auth')
-    , mongoose = require('mongoose')
     , UserRepository = require('../repositories/user_repo')
     , AuthService = require('../services/auth_service');
-
-const mongoURI = require('../config/keys').mongoURI;
-
-mongoose.connect(mongoURI);
 
 router.post('/', function(req, res) {
     console.log(req.body)
