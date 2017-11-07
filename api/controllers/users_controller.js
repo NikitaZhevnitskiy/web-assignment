@@ -6,7 +6,9 @@ var express = require('express')
     , UserRepository = require('../repositories/user_repo')
     , AuthService = require('../services/auth_service');
 
-mongoose.connect('mongodb://localhost/test')
+const mongoURI = require('../config/keys').mongoURI;
+
+mongoose.connect(mongoURI);
 
 router.post('/', function(req, res) {
     console.log(req.body)
