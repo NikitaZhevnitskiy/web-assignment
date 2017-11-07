@@ -1,14 +1,19 @@
 // keys.js - figure out what env to use
 switch (process.env.NODE_ENV){
     case 'production':{
-        module.exports = require('./prod')
+        module.exports = require('./environments/prod');
         break
     }
-    case 'development':{
-        module.exports = require('./dev')
+    case 'mlabdb':{
+        module.exports = require('./environments/mlab');
+        break
+    }
+    case 'docker':{
+        module.exports = require('./environments/docker');
         break
     }
     default: {
-        module.exports = require('./local')
+        process.env.NODE_ENV = 'default local environment';
+        module.exports = require('./environments/local')
     }
 }

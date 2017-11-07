@@ -1,4 +1,4 @@
-// prod keys here
+// local keys here
 module.exports = {
     mongoURI:'mongodb://localhost/todo-list'
 };
