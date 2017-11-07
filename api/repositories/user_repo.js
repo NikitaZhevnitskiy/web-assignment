@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-const host = process.env.DOCKER_DB || "localhost"
-mongoose.connect(`mongodb://${host}/test`);
+// const host = process.env.DOCKER_DB || "localhost"
+const mongoURI = require('../config/keys').mongoURI;
+mongoose.connect(mongoURI);
 const User = require('../models/user')
-    , ObjectID = require('mongodb').ObjectID
+    , ObjectID = require('mongodb').ObjectID;
 
 exports.getAll = function({}, cb) {
     User.find((err, users) => {
@@ -36,7 +37,7 @@ exports.getUserByEmail = function(email, cb){
 exports.getList = function(email, cb){
     User.findOne({'email':email}, (err, user) => {
         if (err) cb(err);
-        if (user.todolist) cb(null,user.todolist);
+        if (user && user.todolist) cb(null,user.todolist);
         if (err) cb(err);
     })
 };
