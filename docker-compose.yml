@@ -13,7 +13,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - DOCKER_DB=mongo
+      - DOCKER_DB_HOST=mongo
     links:
       - mongo
     depends_on:
