@@ -12,6 +12,10 @@ switch (process.env.NODE_ENV){
         module.exports = require('./environments/docker');
         break
     }
+    case 'test':{
+        module.exports = require('./environments/testing');
+        break
+    }
     default: {
         process.env.NODE_ENV = 'default local environment';
         module.exports = require('./environments/local')
