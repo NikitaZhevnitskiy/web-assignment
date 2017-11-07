@@ -62,6 +62,6 @@ buck-out/
 
 
 # config keys
-api/config/dev.js
+api/config/environments/mlab.js
 *.ttf
 
