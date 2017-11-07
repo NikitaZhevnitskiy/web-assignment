@@ -9,11 +9,16 @@
     "concurrently": "^3.5.0",
     "express": "^4.16.2",
     "jwt-simple": "^0.5.1",
-    "mongoose": "^4.12.1"
+    "mongoose": "^4.12.1",
+    "jest": "^21.2.1"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1"
   },
   "scripts": {
     "dev": "concurrently \"mongod\" \"npm run api\" \"npm run web-client\" ",
     "api": "node ./api/server.js",
-    "web-client": "cd web-client && npm start"
+    "web-client": "cd web-client && npm start",
+    "test": "jest"
   }
 }
