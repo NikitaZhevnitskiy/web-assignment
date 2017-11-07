@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 // const host = process.env.DOCKER_DB || "localhost"
 const mongoURI = require('../config/keys').mongoURI;
+// console.log(mongoURI);
 mongoose.connect(mongoURI);
 const User = require('../models/user')
     , ObjectID = require('mongodb').ObjectID;
 
 exports.getAll = function({}, cb) {
     User.find((err, users) => {
+        // console.log(users);
         if (err) cb(err);
         cb(null,users);
     })
@@ -28,7 +30,7 @@ exports.registerUser=function(email, hashedPassword, cb) {
 
 exports.getUserByEmail = function(email, cb){
     User.findOne({'email':email}, (err, user) => {
-        console.log(user)
+        // console.log(user)
         if (err) cb(err);
         cb(null,user);
     })
@@ -64,9 +66,19 @@ exports.deleteItem=function (email, item_id, cb) {
         if(err) cb(err)
         cb(null,data)
     })
-    // User.findOne({'email':email}, (err, user) =>{
-    //     // console.log(user)
-    //     if(err) cb(err)
-    //     cb(null,user)
-    // })
+};
+
+// Test purpose
+exports.cleanTable=function (cb) {
+    User.remove({},function (err) {
+        if(err){
+            console.log(err)
+        } else {
+            cb("cleaned")
+        }
+    })
+};
+
+exports.disconnect=function (done) {
+    mongoose.disconnect(done)
 };
