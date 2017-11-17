@@ -45,11 +45,11 @@ exports.getList = function(email, cb){
 };
 
 exports.createItem=function (email, item, cb) {
-    console.log(email);
-    console.log(item);
+    // console.log(email);
+    // console.log(item);
 
     User.findOne({'email':email}, (err, user) =>{
-        console.log(user)
+        // console.log(user)
         if(err) cb(err)
         user.todolist.push(item)
         user.save((err,u)=>{
@@ -61,7 +61,7 @@ exports.createItem=function (email, item, cb) {
 
 exports.deleteItem=function (email, item_id, cb) {
     var id = new ObjectID(item_id);
-    console.log(id);
+    // console.log(id);
     User.update({"email":email}, { $pull:{"todolist":{"_id":new ObjectID(item_id)}}}, function(err, data) {
         if(err) cb(err)
         cb(null,data)

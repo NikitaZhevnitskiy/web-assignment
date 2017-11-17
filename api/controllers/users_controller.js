@@ -6,13 +6,13 @@ var express = require('express')
     , AuthService = require('../services/auth_service');
 
 router.post('/', function(req, res) {
-    console.log(req.body)
+    // console.log(req.body)
     const email = req.body.email.toLowerCase();
     const passwordInput = req.body.password;
 
     if (Validator.isValid(email) && Validator.isValid(passwordInput)){
         const hashedPassword = AuthService.hash(passwordInput);
-        console.log(passwordInput + "_____" + hashedPassword);
+        // console.log(passwordInput + "_____" + hashedPassword);
         UserRepository.registerUser(email, hashedPassword, function (err,user) {
             if(err) {
                 res.status(409).send(JSON.stringify(err));
@@ -61,7 +61,7 @@ router.put('/list', auth, function (req, res) {
             res.status(404).send(err);
             return;
         }
-        console.log(user)
+        // console.log(user)
         res.status(201).json({todolist:user.todolist});
     })
 });
@@ -74,7 +74,7 @@ router.delete('/list/:id',auth,function (req, res) {
             res.status(404).send(err);
             return;
         }
-        console.log(user)
+        // console.log(user)
         res.status(200).send(user);
     })
 })
