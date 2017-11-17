@@ -4,21 +4,26 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "async": "^2.6.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.0",
     "express": "^4.16.2",
+    "jest": "^21.2.1",
     "jwt-simple": "^0.5.1",
-    "mongoose": "^4.12.1",
-    "jest": "^21.2.1"
+    "mongoose": "^4.12.1"
   },
   "devDependencies": {
-    "jest": "^21.2.1"
+    "supertest": "^3.0.0"
   },
   "scripts": {
     "dev": "concurrently \"mongod\" \"npm run api\" \"npm run web-client\" ",
     "api": "node ./api/server.js",
     "web-client": "cd web-client && npm start",
-    "test": "jest"
+    "test": "jest --forceExit --verbose",
+    "test_controllers": "jest ./__tests__/controllers/auth_controller.test.js",
+    "test_user_controller": "jest ./__tests__/controllers/user_controller.test.js",
+    "test_repositories": "jest ./__tests__/repositories/user_repo.test.js --forceExit --verbose",
+    "test_coverage":"jest --coverage"
   }
 }
