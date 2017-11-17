@@ -1,11 +1,12 @@
 // set test env
 process.env.NODE_ENV = 'test';
 const express = require('express');
-const request = require('supertest');
 const app = express();
 const api = require('../../server');
-const async = require('async');  // < ========= AMAZING LIBRARY https://github.com/caolan/async
 app.use(api);
+
+const async = require('async');
+const agent = require('supertest').agent(app.listen());
 
 /************************** CLEAN DATABASE **************************** */
 const userRepository = require('../../repositories/user_repo');
@@ -28,7 +29,7 @@ const credentials = {
 
 test('GET /hei - Health check ', (done) => {
     // return (do not shutdown app after)
-    return request(app)
+    return agent
         .get('/hei')
         .end((err, res) => {
             // console.log(res);
@@ -39,7 +40,7 @@ test('GET /hei - Health check ', (done) => {
 });
 
 test('POST /users - Register new user', (done) => {
-    return request(app)
+    return agent
         .post('/users')
         .send(credentials)
         .set('Content-Type', 'application/json; charset=utf-8')
@@ -50,10 +51,7 @@ test('POST /users - Register new user', (done) => {
         });
 });
 
-
-
 test('POST /login - Invalid credentials',  (done) => {
-    const agent = request(app);
     return agent
         .post('/login')
         .send(credentials)
@@ -66,7 +64,6 @@ test('POST /login - Invalid credentials',  (done) => {
 });
 
 test('POST /login - With valid token | UGLY callback',  (done) => {
-    const agent = request(app);
     return agent
         .post('/users')
         .send(credentials)
@@ -88,7 +85,6 @@ test('POST /login - With valid token | UGLY callback',  (done) => {
 });
 
 test('POST /login - With valid token | Vanila callback',  (done) => {
-    const agent = request(app);
     var token = 'asd';
     async.series([
             function(cb) {
@@ -115,7 +111,7 @@ test('POST /login - With valid token | Vanila callback',  (done) => {
 
 test('GET /users - No token', (done) => {
     // return (do not shutdown app after)
-    return request(app)
+    return agent
         .get('/users')
         .expect('Content-Type', "text/html; charset=utf-8")
         .end((err, res) => {
@@ -127,7 +123,7 @@ test('GET /users - No token', (done) => {
 
 test('GET /users - With token', (done) => {
     getToken((token)=>{
-        return request(app)
+        return agent
             .get('/users')
             .set('Authorization',token)
             .expect(200)
@@ -140,7 +136,7 @@ test('GET /users - With token', (done) => {
 
 test('GET /me - With token', (done) => {
     getToken((token)=>{
-        return request(app)
+        return agent
             .get('/me')
             .set('Authorization',token)
             .expect(200)
@@ -151,8 +147,9 @@ test('GET /me - With token', (done) => {
     });
 });
 
+
 test('GET /me - Invalid token', (done) => {
-        return request(app)
+        return agent
             .get('/me')
             .set('Authorization',"invalid token")
             .expect(401)
@@ -160,7 +157,6 @@ test('GET /me - Invalid token', (done) => {
 });
 
 const getToken = function(mainCb) {
-    const agent = request(app);
     async.series([
         function(cb) {
             agent

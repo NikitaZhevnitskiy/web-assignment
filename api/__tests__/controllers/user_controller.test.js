@@ -1,11 +1,12 @@
 // set test env
 process.env.NODE_ENV = 'test';
 const express = require('express');
-const request = require('supertest');
+// const request = require('supertest');
 const app = express();
 const api = require('../../server');
 const async = require('async');
 app.use(api);
+const agent = require('supertest').agent(app.listen());
 
 /************************** CLEAN DATABASE **************************** */
 const userRepository = require('../../repositories/user_repo');
@@ -32,7 +33,7 @@ const item = {
 };
 
 const getToken = function(mainCb) {
-    const agent = request(app);
+    // const agent = request(app);
     async.series([
         function(cb) {
             agent
@@ -57,7 +58,7 @@ const getToken = function(mainCb) {
 
 test('GET /list - With token | get all items in list', (done) => {
     getToken((token)=>{
-        return request(app)
+        return agent
             .get('/users/list')
             .set('Authorization',token)
             .set('Content-Type', 'application/json; charset=utf-8')
@@ -73,7 +74,7 @@ test('GET /list - With token | get all items in list', (done) => {
 
 test('PUT /list - With token | create new item', (done) => {
     getToken((token)=>{
-        return request(app)
+        return agent
             .put('/users/list')
             .set('Authorization',token)
             .set('Content-Type', 'application/json; charset=utf-8')
@@ -91,7 +92,7 @@ test('PUT /list - With token | create new item', (done) => {
 
 test('DELETE /list/:id - With token | success', (done) => {
     getToken((token)=>{
-        return request(app)
+        return agent
             .put('/users/list')
             .set('Authorization',token)
             .set('Content-Type', 'application/json; charset=utf-8')
@@ -101,14 +102,14 @@ test('DELETE /list/:id - With token | success', (done) => {
                 // console.log(res.body);
                 expect(201).toBe(res.statusCode);
                 const itemId = res.body.todolist[0]._id;
-                request(app)
+                agent
                     .delete(`/users/list/${itemId}`)
                     .set('Authorization',token)
                     .set('Content-Type', 'application/json; charset=utf-8')
                     .set('Accept', 'application/json; charset=utf-8')
                     .end((err,res)=>{
-                        console.log(res.statusCode);
-                        console.log(res.body);
+                        // console.log(res.statusCode);
+                        // console.log(res.body);
                         expect(200).toBe(res.statusCode)
                         expect(1).toBe(res.body.n);
                         expect(1).toBe(res.body.nModified);
@@ -124,7 +125,7 @@ test('DELETE /list/:id - With token | success', (done) => {
 test('DELETE /list/:id - Valid token, Non-existing item id', (done) => {
     const nonExist = '5a0f5627dd30421a55bf0a11';
     getToken((token)=>{
-        return request(app)
+        return agent
             .put('/users/list')
             .set('Authorization',token)
             .set('Content-Type', 'application/json; charset=utf-8')
@@ -133,7 +134,7 @@ test('DELETE /list/:id - Valid token, Non-existing item id', (done) => {
             .end((err,res) => {
                 // console.log(res.body);
                 expect(201).toBe(res.statusCode);
-                request(app)
+                agent
                     .delete(`/users/list/${nonExist}`)
                     .set('Authorization',token)
                     .set('Content-Type', 'application/json; charset=utf-8')
@@ -155,7 +156,7 @@ test('DELETE /list/:id - Valid token, Non-existing item id', (done) => {
 test('DELETE /list/:id - Valid token, Invalid item id', (done) => {
     const nonValid = 'dasdasdad';
     getToken((token)=>{
-        return request(app)
+        return agent
             .put('/users/list')
             .set('Authorization',token)
             .set('Content-Type', 'application/json; charset=utf-8')
@@ -164,7 +165,7 @@ test('DELETE /list/:id - Valid token, Invalid item id', (done) => {
             .end((err,res) => {
                 // console.log(res.body);
                 expect(201).toBe(res.statusCode);
-                request(app)
+                agent
                     .delete(`/users/list/${nonValid}`)
                     .set('Authorization',token)
                     .set('Content-Type', 'application/json; charset=utf-8')
