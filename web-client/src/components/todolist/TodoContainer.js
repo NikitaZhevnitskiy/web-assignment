@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
-import {URL_API_USER_LIST} from "../../utils/RoutesApi";
+import {URL_API_USER_LIST, SOCKET_API_BASE} from "../../utils/RoutesApi";
 import {getTokenFromStorage} from "../../utils/AuthService";
 import ItemList from "./ItemList";
+import ReactChatView from 'react-chatview';
+import {isLogged, getUserInSystem} from "../../utils/AuthService";
 
 class TodoContainer extends Component{
-
 
     constructor(props){
         super(props);
@@ -13,13 +14,44 @@ class TodoContainer extends Component{
             items:[],
             // createForm
             title: '',
-            description: ''
+            description: '',
+
+            userInSystem:'',
+
+            // chat state
+            ws: null,
+            messages: [],
+            draft: '',
+            scrollable:{}
         }
     }
 
 
     componentDidMount() {
+        if(isLogged()){
+            getUserInSystem((email)=>{this.setState({userInSystem:email})})
+        }
         this.getItems()
+    }
+
+    componentWillMount() {
+        // api url
+        const url = SOCKET_API_BASE;
+        // const url = 'ws://localhost:3000';
+        const ws = new WebSocket(url);
+
+        this.setState({ ws: ws });
+
+        ws.onopen = () => {
+            console.log('Connected!');
+        };
+
+        ws.onmessage = message => {
+            const text = message.data;
+            this.setState({
+                messages: [...this.state.messages, text],
+            });
+        };
     }
 
     isEnabled(){
@@ -68,7 +100,7 @@ class TodoContainer extends Component{
     renderCreateForm(){
         return (
             <div className="container search_block">
-                <form onSubmit={(e) => {this.createItem(e)}}>
+                <form style={{marginBottom:20}} onSubmit={(e) => {this.createItem(e)}}>
                     <h1>New Item</h1>
                     <div className="form-group">
                         <input
@@ -96,17 +128,63 @@ class TodoContainer extends Component{
                         Create
                     </button>
                 </form>
+                {/*Chat view*/}
+                <div>
+                    <form onSubmit={e => {
+                        e.preventDefault();
+                        this.state.ws.send(this.myEmail()+this.state.draft);
+                        this.setState({ draft: '' });
+                    }}>
+                        <ReactChatView
+                            className="chat_view"
+                            flipped={true}
+                            scrollLoadThreshold={20}
+                            reversed={true}
+                            onInfiniteLoad={()=>(this)}
+                            returnScrollable={this.returnScrollable}
+                        >
+                            {this.state.messages.map(i=> {return <div>{i}</div>} )}
+                        </ReactChatView>
+                        <input
+                            className="chat_input"
+                            onChange={e => this.setState({ draft: e.target.value })}
+                            value={this.state.draft}
+                            type="text"
+                            placeholder="Message" />
+                    </form>
+                </div>
+
+
             </div>
         )
     }
 
+    myEmail(){
+        let email = "";
+        if(this.state.userInSystem){
+            email=`(${this.state.userInSystem}): `;
+        }
+        return email;
+    }
+
+    returnScrollable = (scrollable) => {
+        this.setState({ scrollable });
+        this.scrollPositionBottom()
+    };
+
+    scrollPositionBottom = () => {
+        setTimeout(() => {
+            const { scrollable } = this.state;
+            if (scrollable) {scrollable.scrollTop = scrollable.scrollHeight;}}, 100);
+    };
+
     createItem(e) {
         e.preventDefault();
         //validation
-        const title = this.state.title
-        const description = this.state.description
+        const title = this.state.title;
+        const description = this.state.description;
         if(title.length<1 || description.length<1){
-            console.log("input not valid")
+            console.log("input not valid");
             return
         }
         const item = {title:this.state.title,description:this.state.description};
@@ -122,11 +200,11 @@ class TodoContainer extends Component{
         }).then(res => {
             switch(res.status){
                 case 404: {
-                    console.log("smth wrong 404")
+                    console.log("smth wrong 404");
                     return {}
                 }
                 case 401: {
-                    console.log("unautorized 401")
+                    console.log("unautorized 401");
                     return {}
                 }
                 default: {

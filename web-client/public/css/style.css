@@ -67,3 +67,32 @@
     margin-bottom: 20px;
     width: 100%;
 }
+
+/******************************
+           CHAT VIEW
+*******************************/
+.chat_view {
+    position: inherit;
+    background-color: #e0f0d9;
+    margin: auto;
+    padding: 2px;
+    border: solid 1px #ddd;
+    /*border-bottom: solid px #ddd;*/
+    border-radius: 5px 5px 0 0;
+    overflow: auto;
+    height: 200px;
+    width: 75%;
+}
+.chat_input {
+    color: black;
+    position: inherit;
+    background-color: #ddd;
+    margin: auto;
+    padding: 2px;
+    border: solid 2px #ddd;
+    /*border-top: solid 2px #ddd;*/
+    border-radius: 0 0 5px 5px;
+    overflow: auto;
+    width: 75%;
+    display: block;
+}
