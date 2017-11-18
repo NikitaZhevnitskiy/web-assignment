@@ -63,10 +63,14 @@ Additional complexity If you store confidential info in token it should be encry
 
 ## 4. Hva er hensikten med REpresentational State Transfer (REST)? Hva er noen fordeler og ulemper med å implementere nivå 2 og 3 av REST i Richardson Maturity Model?
 
+## 5. Hva er hensikten med å automatisere testing av en fullstack webapplikasjon? Hvis du måtte velge mellom å skrive unit-tester, integrasjonstester, eller end-to-end-tester, hvilken type test ville du valgt? Hvorfor?
+
+## 6.Hva er fordeler og ulemper ved å bruke WebSockets? Når bør man ikke bruke dem? 
+
 ## Sources
 [Quora](https://www.quora.com/What-are-the-pros-and-cons-of-MEAN-javascript-stack-vs-LAMP-stack)  
 [Altexsoft](https://www.altexsoft.com/blog/engineering/the-good-and-the-bad-of-javascript-full-stack-development/)
 [BBVA](https://bbvaopen4u.com/en/actualidad/rest-api-what-it-and-what-are-its-advantages-project-development)
 
 Login design  
-https://serverless-stack.com/chapters/create-a-login-page.html  ``
+https://serverless-stack.com/chapters/create-a-login-page.html 
