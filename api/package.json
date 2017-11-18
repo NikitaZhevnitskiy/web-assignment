@@ -11,7 +11,8 @@
     "express": "^4.16.2",
     "jest": "^21.2.1",
     "jwt-simple": "^0.5.1",
-    "mongoose": "^4.12.1"
+    "mongoose": "^4.12.1",
+    "ws": "^3.2.0"
   },
   "devDependencies": {
     "supertest": "^3.0.0"
@@ -21,10 +22,13 @@
     "api": "node ./api/server.js",
     "web-client": "cd web-client && npm start",
     "test": "jest --forceExit --verbose",
-    "test_coverage":"jest --coverage --forceExit --verbose"
+    "test_coverage": "jest --coverage --forceExit --verbose"
   },
   "jest": {
     "collectCoverage": true,
-    "coverageReporters": ["json", "html"]
+    "coverageReporters": [
+      "json",
+      "html"
+    ]
   }
 }
