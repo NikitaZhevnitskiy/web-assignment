@@ -11,7 +11,8 @@
 \#5  
 ![img](./screenshots/screen5.png)  
 ### Comments  
-I have done all tasks including bonus tasks: use ESLint and Search feature.  
+I have done all tasks including bonus tasks: use ESLint,
+Search feature and as WebSocket implementation I chose Chat.  
 I also rebuild web-client and now after deleting list-item, 
 the list refreshes without page reloading. 
 
@@ -27,7 +28,7 @@ the list refreshes without page reloading.
 | page not found | screenshot #5 | 
 
 
-### Advantages, disadvantages & improvements
+### (+)Advantages, (-)disadvantages & improvements
 | Status          | Description | Improvement
 | ----- | ----- | ----- |
 | +  |  Simplicity | |
@@ -35,6 +36,7 @@ the list refreshes without page reloading.
 | +  |  Search feature | Possibility to avoid eager data fetch. Improve efficiency |
 | +  |  Async reloading. List refresh | Optimize code |
 | +  | Docker  | Improve networking and linking between docker containers|
+| +  | Chat  | Add tests for web sockets|
 
 ### Requirements
 All requirements are fulfilled. [Ref](https://github.com/theneva/pg6300-17/blob/master/a01/a01.md)

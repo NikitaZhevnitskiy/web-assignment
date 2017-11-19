@@ -1,7 +1,9 @@
 ## How to run 
 
 #### Docker  
-* start  
+* build (please build first -> recommend, because Im using docker-compose version 2)  
+`docker-compose build`
+* run  
 `docker-compose up -d`  
 * stop  
 `docker-compose -f docker-compose.yml down --rmi all`  
@@ -10,7 +12,13 @@
 * install  
 `npm run setup`  
 * start  
-`npm run dev`  
+`npm run dev` 
+
+#### Test available for api module
+in api module, install node_module and run  
+`npm run test`  
+for test coverage  
+`npm run test_coverage` 
 
 
 ## Reports
