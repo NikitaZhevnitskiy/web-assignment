@@ -16,12 +16,21 @@ API port exposed for reason to have access from mobile-client to docker containe
 * start  
 `npm run dev` 
 
-#### Test available for api module
+### Comments
+* All modules auth feature (login/register)  
+* API module Tests, WebSockets
 in api module, install node_module and run  
 `npm run test`  
 for test coverage  
 `npm run test_coverage` 
 
+* WEB-client module Chat feature implemented with WebSockets
+* WEB-client module ajax calls for create item and delete item
+* WEB-client module search by string entry for item.title
+* WEB-client module search by string entry for item.title
+
+* MOBILE-client module implemented using react-native and redux, for more info check `report Mobile-client` 
+* MOBILE-client module search feature
 
 ## Reports
 #### [Report API](./api/README.md)

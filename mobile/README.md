@@ -29,7 +29,11 @@ OR
 | +  |  Routing with react-native-router-flux | Read documentation, especially for Stack component and MobX-friendly (observable for state) |
 | -  |  Logout does not work properly, and reason is button belongs to Header which is child of Route elements. Issue how to connect Route to redux  | Implement custom header, extends from react component, connect to redux. Or connect Route directly to redux (has some issues with it) |
 
-
+## Comments about Redux
+I personally like redux, it helps a lot to handle changes in several fields in state after action. 
+It was especially useful with login/register feature. Back side of this coin is complexity, and handling async actions with redux-thunk. 
+I use redux, react-redux and redux-thunk. I also like idea of centralized state storage and decoupling any state changing to actions.
+I pass additional course on [Udemy](https://www.udemy.com/the-complete-react-native-and-redux-course/learn/v4/content) to be successful in this project. 
 
 ## Sources  
 UI  
