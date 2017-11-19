@@ -14,8 +14,8 @@ services:
       - 3000:3000
     environment:
       - DOCKER_DB_HOST=mongo
-    links:
-      - mongo
+#    links:
+#      - mongo
     depends_on:
       - mongo
   web:
@@ -26,3 +26,4 @@ services:
       - 5000:5000
     depends_on:
       - api
+      - mongo
