@@ -8,6 +8,8 @@
 * stop  
 `docker-compose -f docker-compose.yml down --rmi all`  
 
+API port exposed for reason to have access from mobile-client to docker container 
+
 #### Local (optional)
 * install  
 `npm run setup`  

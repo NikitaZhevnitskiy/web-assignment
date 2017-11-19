@@ -58,19 +58,64 @@ The size of Jwt can be big depends on amount of claims inside, that can affect p
 Common question also is where to store token. There are several options: 
 local storage, cookie(limited with 4Kb) and sessionStorage(clear it after browser closed).
 If token stored in local/session storage, than it won't work across domains, which makes token-based auth secured.
-Additional complexity If you store confidential info in token it should be encrypted.    
+Additional complexity, If you store confidential info in token it should be encrypted. Also there are issue of how to deactivate token (make token invalid) after logout, because the token is still valid. 
+One of the solutions could be retention policy (set expiration date for token as a claim inside token)   
  
 
 ## 4. Hva er hensikten med REpresentational State Transfer (REST)? Hva er noen fordeler og ulemper med å implementere nivå 2 og 3 av REST i Richardson Maturity Model?
+The answer is in the name of REST abbreviation. Its architectural style for building communication via HTTP between server-client, where the client can be another server or service(web-services, micro-service, etc).
+In REST, producers and consumers are decoupled, in server/client model it means that nodes interact with each other in complex ways without the client knowing anything beforehand about the server and the resources it hosts.
+The REST purposes:  
+1) Define resources by a identifier (URI)
+2) For resources manipulation using a common set of verbs (HTTP verbs)
+3) Resource representation depends on request (text, json, xml, etc...)
+4) Provide transfer for state of object and representation of this state
+5) Representing relationship between resource and its representation
+6) Resource discovery (lvl3)
+
+Advantages and disadvantages of implementing lvl2 and lvl3 of Richardson Maturity Model.  
+`Advantages:`  
+Leonard Richardson defined the principal elements of a REST approach into three steps (levels).  
+Level 0 is use http for state transfer.  
+Level 1 is introducing resources to several endpoints with semantic aggregation. 
+Level 2 is using HTTP verbs to separate action logic to resource. 
+HTTP is oriented around verbs and resources, REST uses HTTP verbs for lookups should use GET(defined as a safe operation) requests and PUT, POST, 
+and DELETE requests should be used for mutation, creation, and deletion. At this stage client also can use caching and get response code to understand what actually happened.
+Level 3 is using HATEOAS (Hypertext As The Engine Of Application State). Its introduces discoverability, it contain additional information in server response, 
+which helps to client understand state representations and get hints about future steps. 
+There are several benefits such as: Allows the server to change URI scheme without breaking clients, 
+It helps client developers explore api(discovery) and server team can advertise new features(discovery).  
+`Disadvantages:`  
+The biggest disadvantage of level 2 & 3 is that REST by itself is a standard its architectural style - The implementations of its style could be so different and we can only follow best practises of it.
+How to find best practises of REST implementation this is not trivial problem, because nobody can agree on what all the methods, payloads, and response codes really mean.
+Implementing of Level 2 is that The REST vocabulary is not fully supported, web browsers could have limited support for PUT or DELETE
 
 ## 5. Hva er hensikten med å automatisere testing av en fullstack webapplikasjon? Hvis du måtte velge mellom å skrive unit-tester, integrasjonstester, eller end-to-end-tester, hvilken type test ville du valgt? Hvorfor?
+The purpose of test automation is to provide fast feedback to developers about is software working correct, robust, stable. Enable team run faster, usually several people work on different parts of project.
+It helps to find weak points on early stages of development. Its support software quality protection and reduce costs in long-term, 
+because companies pays for each working hour, including bug -hunting, -fixing. I would chose to write all tests unit, integrational and e2e.
+A type of tests are doing the same job, just with different scale. In unit testing its small unit: class, method. 
+In integrational tests its test against subsystem, which can be also isolated. In e2e is testing against deployed system.  
+Different type of testing give feedback to developers on different scale. I work mostly with bottom-up, 
+because during my study I had to build many different applications. When you start from scratch, you build your system from bottom, 
+starts with small units, test them and keep building on top of it.  
 
 ## 6.Hva er fordeler og ulemper ved å bruke WebSockets? Når bør man ikke bruke dem? 
-
+WebSockets is a new W3C JavaScript API and protocol for two-way communication over the Internet. 
+The advantage is low-latency bidirectional data interchanges. Allows push messages from server side. Provide opportunity to build real-time, time-sensitive applications.
+This protocol is faster than HTTP, because in HTTP client must request documents from a server and wait for the document to be sent before it can displayed. 
+With WebSockets allows to send and receive data immediately using fixed data formats: text, binary arrays, or blobs.   
+`Advantages` short: Duplex communication, fast, increase client/server efficiency, uses TCP.  
+`Disadvantages`:  
+There are still several proxies and transparent proxies not supporting WebSockets. Browser must be fully HTML5 compliant.    
+`When to use`:
+WebSockets could be used for long-term, two-way communication is useful such as:
+online games, social network notifications, real-time displays of stock and weather information, and other timely data.
 ## Sources
 [Quora](https://www.quora.com/What-are-the-pros-and-cons-of-MEAN-javascript-stack-vs-LAMP-stack)  
 [Altexsoft](https://www.altexsoft.com/blog/engineering/the-good-and-the-bad-of-javascript-full-stack-development/)
-[BBVA](https://bbvaopen4u.com/en/actualidad/rest-api-what-it-and-what-are-its-advantages-project-development)
+[BBVA](https://bbvaopen4u.com/en/actualidad/rest-api-what-it-and-what-are-its-advantages-project-development)  
+[Martin Fawler](https://martinfowler.com/articles/richardsonMaturityModel.html)
 
 Login design  
 https://serverless-stack.com/chapters/create-a-login-page.html 
