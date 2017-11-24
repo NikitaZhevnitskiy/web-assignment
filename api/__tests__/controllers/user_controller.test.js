@@ -10,11 +10,11 @@ const agent = require('supertest').agent(app.listen());
 
 /************************** CLEAN DATABASE **************************** */
 const userRepository = require('../../repositories/user_repo');
-afterEach(() => {
-    userRepository.cleanTable((cleaned)=>{
-        expect(cleaned).toEqual("cleaned");
-    });
-});
+// afterEach(() => {
+//     userRepository.cleanTable((cleaned)=>{
+//         expect(cleaned).toEqual("cleaned");
+//     });
+// });
 beforeEach(() => {
     userRepository.cleanTable((cleaned)=>{
         expect(cleaned).toEqual("cleaned");

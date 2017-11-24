@@ -10,11 +10,11 @@ const agent = require('supertest').agent(app.listen());
 
 /************************** CLEAN DATABASE **************************** */
 const userRepository = require('../../repositories/user_repo');
-afterEach(() => {
-    userRepository.cleanTable((cleaned)=>{
-        expect(cleaned).toEqual("cleaned");
-    });
-});
+// afterEach(() => {
+//     userRepository.cleanTable((cleaned)=>{
+//         expect(cleaned).toEqual("cleaned");
+//     });
+// });
 beforeEach(() => {
     userRepository.cleanTable((cleaned)=>{
         expect(cleaned).toEqual("cleaned");
@@ -58,7 +58,7 @@ test('POST /login - Invalid credentials',  (done) => {
         .set('Content-Type', 'application/json; charset=utf-8')
         .set('Accept', 'application/json; charset=utf-8')
         .end(function (err, res) {
-            expect(res.statusCode).toBe(500);
+            expect(res.statusCode).toBe(404);
             done();
         });
 });
