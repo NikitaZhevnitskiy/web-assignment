@@ -1,5 +1,6 @@
+# Study project for Web development & API design
+[VIdeo description](https://youtu.be/lw9H2i6860w)
 ## How to run 
-
 #### Docker  
 * build (please build first -> recommend, because Im using docker-compose version 2)  
 `docker-compose build`
