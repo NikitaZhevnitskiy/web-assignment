@@ -5,6 +5,10 @@
 `docker-compose build`
 * run  
 `docker-compose up -d`  
+Verify that all nodes up  
+`docker-compose ps`  
+    // *if api Exits, run again  
+    // `docker-compose up -d`  
 * stop  
 `docker-compose -f docker-compose.yml down --rmi all`  
 

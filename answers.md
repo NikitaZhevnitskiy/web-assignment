@@ -48,19 +48,21 @@ The second case is transfer or analyze streaming data.
 
 ## 3. Hva er noen fordeler og ulemper ved å sende et token (som JSON Web Token) via en HTTPheader (som Authorization) kontra å bruke en Cookie?
 Token-based authentication is stateless, server does not need to keep a record.
-Cookie based authentication is stateful, which means that session must be kept both server and client-side.
+Cookie based authentication is stateful, which means that session must be kept server-side.
 Token contain all required data for validation and user info: user_id, role, expire date, etc... 
-Back-end systems with token-based authentication generate token on successful login and that incoming tokens are valid.
-Token management across different domains with CORS is trivial comparing with managing cookies with cross domain.
+Back-end systems with token-based authentication generate token on successful login action, that incoming tokens are valid.
 Token-based authentication has lower performance than cookie-based because during the validation process, back-end system 
-has to query database. Token-based authentication is easy to implement for services that do not have a concept of a cookie store: mobile clients, IoT.
+has to query database. Token-based authentication is 
+easy to implement for services that do not have a concept of a cookie store: mobile clients, IoT.
 The size of Jwt can be big depends on amount of claims inside, that can affect performance on each call. 
 Common question also is where to store token. There are several options: 
 local storage, cookie(limited with 4Kb) and sessionStorage(clear it after browser closed).
 If token stored in local/session storage, than it won't work across domains, which makes token-based auth secured.
 Additional complexity, If you store confidential info in token it should be encrypted. Also there are issue of how to deactivate token (make token invalid) after logout, because the token is still valid. 
-One of the solutions could be retention policy (set expiration date for token as a claim inside token)   
- 
+One of the solutions could be retention policy (set expiration date for token as a claim inside token).   
+When to store token in Cookie is preferable? When you want to support more browsers, because Local Storage is available only in HTML5. 
+Cookies used with the HttpOnly cookie flag, are not accessible through JavaScript. Also Secure cookie flag can guarantee the cookie is only sent over HTTPS.
+  
 
 ## 4. Hva er hensikten med REpresentational State Transfer (REST)? Hva er noen fordeler og ulemper med å implementere nivå 2 og 3 av REST i Richardson Maturity Model?
 The answer is in the name of REST abbreviation. Its architectural style for building communication via HTTP between server-client, where the client can be another server or service(web-services, micro-service, etc).
