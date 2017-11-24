@@ -23,7 +23,7 @@ router.post('/login', function(req, res) {
                 }
 
                 if(!user){
-                    res.status(500).send('user not found');
+                    res.status(404).send('user not found');
                     return;
                 }
 

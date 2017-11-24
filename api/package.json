@@ -22,6 +22,9 @@
     "api": "node ./api/server.js",
     "web-client": "cd web-client && npm start",
     "test": "jest --forceExit --verbose",
+    "test_repositories": "jest ./__tests__/repositories/user_repo.test.js --forceExit --verbose",
+    "test_user": "jest ./__tests__/controllers/user_controller.test.js --forceExit --verbose",
+    "test_auth": "jest ./__tests__/controllers/auth_controller.test.js --forceExit --verbose",
     "test_coverage": "jest --coverage --forceExit --verbose"
   },
   "jest": {
