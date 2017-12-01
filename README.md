@@ -29,6 +29,12 @@ in api module, install node_module and run
 for test coverage  
 `npm run test_coverage` 
 
+### Main improvements in API & WEB-CLIENT
+I add feature to make items public/private. I was not able to init public todo-items when application was init.
+I update db schemas, add new end-point and create own text transfer format for delivering messages via ws.
+Its not implemented to final stage, because I got lost in chain of callbacks of ws -> repos -> controllers -> forEach methods.
+This is a final variant of my delivery. 
+
 * WEB-client module Chat feature implemented with WebSockets
 * WEB-client has 50/50 implemented public/private items via sockets
 * WEB-client module ajax calls for create item and delete item
