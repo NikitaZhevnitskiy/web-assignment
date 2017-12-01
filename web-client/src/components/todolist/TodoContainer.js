@@ -48,9 +48,11 @@ class TodoContainer extends Component{
 
         ws.onmessage = message => {
             const text = message.data;
-            this.setState({
-                messages: [...this.state.messages, text],
-            });
+            if(!(text.endsWith("}") && text.includes("{"))) {
+                this.setState({
+                    messages: [...this.state.messages, text],
+                });
+            }
         };
     }
 
@@ -143,7 +145,7 @@ class TodoContainer extends Component{
                             onInfiniteLoad={()=>(this)}
                             returnScrollable={this.returnScrollable}
                         >
-                            {this.state.messages.map(i=> {return <div>{i}</div>} )}
+                            {this.state.messages.map((i,index)=> {return <div key={index}>{i}</div>} )}
                         </ReactChatView>
                         <input
                             className="chat_input"
