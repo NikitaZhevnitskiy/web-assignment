@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var ItemSchema = new Schema({
     title:{type:String, required:true},
-    description:{type:String, required:true}
+    description:{type:String, required:true},
+    public:{type:Boolean, default:false}
 });
 
 var UserSchema = new Schema({

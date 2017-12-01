@@ -68,6 +68,20 @@ exports.deleteItem=function (email, item_id, cb) {
     })
 };
 
+exports.changeItemPublicState=function (email, id,state, cb) {
+    var item_id = new ObjectID(id);
+    var newState=false
+
+    if(state==='true'){
+       newState=true
+    }
+    User.update({"email":email,"todolist._id": item_id}, {'$set': {
+        'todolist.$.public': newState} }, function (err, data) {
+        if(err) cb(err);
+        cb(null,data)
+    })
+};
+
 // Test purpose
 exports.cleanTable=function (cb) {
     User.remove({},function (err) {

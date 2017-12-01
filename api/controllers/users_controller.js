@@ -79,4 +79,20 @@ router.delete('/list/:id',auth,function (req, res) {
     })
 })
 
+router.post('/list/:id',auth,function (req, res) {
+    const body = req.body;
+    const state = body.state;
+
+    const item_id = req.params.id;
+    const email = AuthService.decodeToken(req.header('Authorization'));
+    UserRepository.changeItemPublicState(email,item_id,state, function (err, data) {
+        if(err) {
+            res.status(404).send(err);
+            return;
+        }
+        res.status(200).send(data);
+    })
+
+})
+
 module.exports = router;
