@@ -30,6 +30,7 @@ for test coverage
 `npm run test_coverage` 
 
 * WEB-client module Chat feature implemented with WebSockets
+* WEB-client has 50/50 implemented public/private items via sockets
 * WEB-client module ajax calls for create item and delete item
 * WEB-client module search by string entry for item.title
 * WEB-client module search by string entry for item.title
