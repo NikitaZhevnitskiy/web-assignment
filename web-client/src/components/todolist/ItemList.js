@@ -137,13 +137,13 @@ class ItemList extends Component{
         if(item.public){
             return(
                 <div>
-                    {this.getMarkerButton("Make private!",item)}
+                    {this.getMarkerButton("Make public!",item)}
                 </div>
             )
         }else {
             return(
                 <div>
-                    {this.getMarkerButton("Make public!",item)}
+                    {this.getMarkerButton("Make private!",item)}
                 </div>
             )
         }
